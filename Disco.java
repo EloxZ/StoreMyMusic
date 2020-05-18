@@ -6,25 +6,37 @@ import java.util.List;
 
 
 public class Disco {
-  int idDisco;
-  String titulo;
-  int anoSalida;
-  int anoEdicion;
-  String numeroCatalogo;
-  String codigoBarras;
-  Date fechaCompra;
-  double precioCompra;
-  String notas;
-  double valoracion;
-  String paisEdicion;
-  String posicionEnUbicacion;
-  int idCategoria;
-  int idDiscografica;
-  int idUbicacion;
-  int idTienda;
-  List<Genero> generos;
-  List<Autor> autores;
-  List<Soporte> soportes;
-  List<Prestamo> prestamos;
-  Estado estado;
+	private int idDisco;
+	private String titulo;
+	private int anoSalida;
+	private int anoEdicion;
+	private String numeroCatalogo;
+	private String codigoBarras;
+	private Date fechaCompra;
+	private double precioCompra;
+	private String notas;
+	private double valoracion;
+	private String paisEdicion;
+	private String posicionEnUbicacion;
+	private int idCategoria;
+	private int idDiscografica;
+	private int idUbicacion;
+	private int idTienda;
+	private List<Genero> generos;
+	private List<Autor> autores;
+	private List<Soporte> soportes;
+	private List<Prestamo> prestamos;
+	private Estado estado;
+	
+	public Disco(String st) {
+		titulo = st;
+	}
+	
+	public String getTitulo() {
+		return titulo;
+	}
+	
+	public int getID() {
+		return idDisco;
+	}
 }
