@@ -32,7 +32,7 @@ public class ConexionJDBC extends ConexionBD{
 		return instanciaInterfaz;
 	}
 	
-	public int añadirDisco(Disco dis) {
+	public int aÃ±adirDisco(Disco dis) {
 		int discoID = 0;
 		String insertBody = "INSERT INTO Discos(Titulo) VALUES(?)";
 		try {
@@ -127,7 +127,8 @@ public class ConexionJDBC extends ConexionBD{
 	        return discos;
 	}
 	
-	public void añadirDatosAdquisicion(int id, String fecha, int precio) {
+	public void aÃ±adirDatosAdquisicion(int id, String fecha, int precio) {
+		//fecha tiene que ser un String de formato YYYY-MM-DD
 		String query = "UPDATE Discos SET FechaCompra = ?, PrecioCompra = ? WHERE idDisco = ?";
 		java.sql.Date fecha2 = java.sql.Date.valueOf(fecha);
 		try {
@@ -141,9 +142,8 @@ public class ConexionJDBC extends ConexionBD{
 		}
 	}
 	
-	public void añadirNotasValoracion(int id, String nota, float valoracion) {
-		//fecha tiene que ser un String de formato YYYY-MM-DD
-		String query = "UPDATE Discos SET Notas = ?, Valoracion = ? WHERE idDisco = ?";
+	public void aÃ±adirNotasValoracion(int id, String nota, float valoracion) {
+			String query = "UPDATE Discos SET Notas = ?, Valoracion = ? WHERE idDisco = ?";
 		try {
 			PreparedStatement texto = conn.prepareStatement(query);
 			texto.setString(1, nota);
