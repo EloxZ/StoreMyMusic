@@ -12,6 +12,8 @@ public abstract class ConexionBD {
 		static final String PASS = "beyonce";
 		
 		public abstract int añadirDisco(Disco dis);
-
+		public abstract void eliminarDisco(int id);
 		protected abstract List<Autor> listaAutores();
+		public abstract void añadirDatosAdquisicion(int id, String fecha, int precio);
+		public abstract void añadirNotasValoracion(int id, String nota, float valoracion);
 }
