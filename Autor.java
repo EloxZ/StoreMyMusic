@@ -3,10 +3,13 @@ package sMM;
 public class Autor {
 	int idAutor;
 	String nombreAutor;
+	String nacionalidad;
 	
-	Autor (int id, String nombre){
+	Autor (int id, String nombre, String pais){
 		idAutor = id;
 		nombreAutor = nombre;
+		nacionalidad = pais;
+		
 	}
 
 	Autor (String nombre){
@@ -30,9 +33,17 @@ public class Autor {
 		return nombreAutor;
 	}
 
+	public void setNacionalidad(String pais) {
+		nacionalidad = pais;
+	}
+
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+	
 	@Override
 	public String toString() {
-		return nombreAutor;
+		return "["+idAutor+"] "+nombreAutor+" ("+nacionalidad+")";
 	}
 }
 

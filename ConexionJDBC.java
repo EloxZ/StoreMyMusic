@@ -1,6 +1,10 @@
 package sMM;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 
 public class ConexionJDBC extends ConexionBD{
@@ -27,6 +31,36 @@ public class ConexionJDBC extends ConexionBD{
 		}
 		return instanciaInterfaz;
 	}
+	
+	public List<Autor> listaAutores() {
+		ArrayList<Autor> lAutores = new ArrayList<>();
+		String selectQueryBody = "SELECT * FROM Autores";
+		Statement querySt;
+		try {
+			querySt = conn.createStatement();
+			ResultSet rs = querySt.executeQuery(selectQueryBody);
+			// position result to first
+			int cont = 0;
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					String pais = rs.getString(3);
+					lAutores.add(new Autor(id, name, pais));
+					System.out.println(id+" "+name+" "+pais);
+					cont++;
+				}
+			}
+			System.out.println(lAutores);
+			System.out.println("Importados "+cont+" autores");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lAutores;
+	}
+	
 	
 	public int añadirDisco(Disco dis) {
 		int discoID = 0;
