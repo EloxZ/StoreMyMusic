@@ -108,7 +108,7 @@ public class Disco {
 		return valoracion;
 	}
 
-	public void setValoracion(double valoracion) {
+	public void setValoracion(float valoracion) {
 		this.valoracion = valoracion;
 	}
 
