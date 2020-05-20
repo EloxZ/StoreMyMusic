@@ -61,6 +61,7 @@ public class ConexionJDBC extends ConexionBD{
 			e.printStackTrace();
 		}
 	}
+	
 /*AUTORES*********************************************************************************/	
 
 	public List<Autor> listaAutores() {
@@ -201,6 +202,82 @@ public class ConexionJDBC extends ConexionBD{
 			e.printStackTrace();
 		}
 	}
+	
+	/*AMIGOS*********************************************************************************/	
+
+	public List<Amigo> listaAmigos() {
+		ArrayList<Amigo> lAmigos = new ArrayList<>();
+		String selectQueryBody = "SELECT * FROM Amigos";
+		Statement querySt;
+		try {
+			querySt = conn.createStatement();
+			ResultSet rs = querySt.executeQuery(selectQueryBody);
+			// position result to first
+			int cont = 0;
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					lAmigos.add(new Amigo(id, name));
+					System.out.println(id+" "+name);
+					cont++;
+				}
+			}
+			System.out.println(lAmigos);
+			System.out.println("Importados "+cont+" amigos");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lAmigos;
+	}
+	
+	public int añadirAmigo(Amigo a) {
+		int amigoID = 0;
+		String insertBody = "INSERT INTO Amigos (NombreAmigo) VALUES(?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, a.getNombre());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				amigoID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return amigoID;
+	}	
+	
+	public void modificarAmigo(int id, String nombre) {
+		String query = "UPDATE Amigos SET nombreAmigo = ? WHERE idAmigo = ?";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(2, id);
+			texto.setString(1, nombre);
+			int res = texto.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarAmigo(int id) {
+		//int discoID = dis.getID();
+		//System.out.println(discoID);
+		String deleteBody = "DELETE FROM Amigo WHERE (idAmigo = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(deleteBody);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/***************************************************************************************/
+	
+	
 }
 	
 

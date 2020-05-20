@@ -13,10 +13,14 @@ public abstract class ConexionBD {
 		
 		public abstract int añadirDisco(Disco dis);
 		public abstract void eliminarDisco(int id);
-		protected abstract List<Autor> listaAutores();
+		public abstract List<Autor> listaAutores();
 		public abstract int añadirAutor(Autor a);
 		public abstract void modificarAutor(int id, String nombre, String pais);
 		public abstract void eliminarAutor(int id);
+		public abstract List<Amigo> listaAmigos();
+		public abstract int añadirAmigo(Amigo a);
+		public abstract void modificarAmigo(int id, String nombre);
+		public abstract void eliminarAmigo(int id);
 		public abstract void añadirDatosAdquisicion(int id, String fecha, int precio);
 		public abstract void añadirNotasValoracion(int id, String nota, float valoracion);
 }
