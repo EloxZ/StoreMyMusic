@@ -32,7 +32,7 @@ public class ConexionJDBC extends ConexionBD{
 		return instanciaInterfaz;
 	}
 	
-	public int aÃ±adirDisco(Disco dis) {
+	public int añadirDisco(Disco dis) {
 		int discoID = 0;
 		String insertBody = "INSERT INTO Discos(Titulo) VALUES(?)";
 		try {
@@ -61,7 +61,8 @@ public class ConexionJDBC extends ConexionBD{
 			e.printStackTrace();
 		}
 	}
-	
+/*AUTORES*********************************************************************************/	
+
 	public List<Autor> listaAutores() {
 		ArrayList<Autor> lAutores = new ArrayList<>();
 		String selectQueryBody = "SELECT * FROM Autores";
@@ -90,7 +91,53 @@ public class ConexionJDBC extends ConexionBD{
 		}
 		return lAutores;
 	}
+	
+	public int añadirAutor(Autor a) {
+		int autorID = 0;
+		String insertBody = "INSERT INTO Autores (NombreAutor,Nacionalidad) VALUES(?,?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, a.getNombre());
+			texto.setString(2, a.getNacionalidad());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				autorID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return autorID;
+	}	
+	
+	public void modificarAutor(int id, String nombre, String pais) {
+		String query = "UPDATE Autores SET nombreAutor = ?, nacionalidad = ? WHERE idAutor = ?";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(3, id);
+			texto.setString(1, nombre);
+			texto.setString(2, pais);
+			int res = texto.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarAutor(int id) {
+		//int discoID = dis.getID();
+		//System.out.println(discoID);
+		String deleteBody = "DELETE FROM Autores WHERE (idAutor = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(deleteBody);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
+	/***************************************************************************************/
+	
 	public HashMap<Integer, Disco> getDiscos() {
 	        HashMap<Integer, Disco> discos = new HashMap<>();
 	        String selectQueryBody = "SELECT * FROM Discos";
@@ -127,7 +174,7 @@ public class ConexionJDBC extends ConexionBD{
 	        return discos;
 	}
 	
-	public void aÃ±adirDatosAdquisicion(int id, String fecha, int precio) {
+	public void añadirDatosAdquisicion(int id, String fecha, int precio) {
 		//fecha tiene que ser un String de formato YYYY-MM-DD
 		String query = "UPDATE Discos SET FechaCompra = ?, PrecioCompra = ? WHERE idDisco = ?";
 		java.sql.Date fecha2 = java.sql.Date.valueOf(fecha);
@@ -142,7 +189,7 @@ public class ConexionJDBC extends ConexionBD{
 		}
 	}
 	
-	public void aÃ±adirNotasValoracion(int id, String nota, float valoracion) {
+	public void añadirNotasValoracion(int id, String nota, float valoracion) {
 			String query = "UPDATE Discos SET Notas = ?, Valoracion = ? WHERE idDisco = ?";
 		try {
 			PreparedStatement texto = conn.prepareStatement(query);

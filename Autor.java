@@ -12,9 +12,10 @@ public class Autor {
 		
 	}
 
-	Autor (String nombre){
+	Autor (String nombre, String pais){
 		idAutor = 0;
 		nombreAutor = nombre;
+		nacionalidad = pais;
 	}
 
 	public void setIdentificador(int id) {
