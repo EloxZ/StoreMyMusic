@@ -12,8 +12,9 @@ public class Disco {
 	private int anoEdicion;
 	private String numeroCatalogo;
 	private String codigoBarras;
-	private Date fechaCompra;
-	private double precioCompra;
+	private String codigoColeccion;
+	private String fechaCompra;
+	private float precioCompra;
 	private String notas;
 	private float valoracion;
 	private String paisEdicion;
@@ -80,19 +81,19 @@ public class Disco {
 		this.codigoBarras = codigoBarras;
 	}
 
-	public Date getFechaCompra() {
+	public String getFechaCompra() {
 		return fechaCompra;
 	}
 
-	public void setFechaCompra(Date fechaCompra) {
+	public void setFechaCompra(String fechaCompra) {
 		this.fechaCompra = fechaCompra;
 	}
 
-	public double getPrecioCompra() {
+	public float getPrecioCompra() {
 		return precioCompra;
 	}
 
-	public void setPrecioCompra(double precioCompra) {
+	public void setPrecioCompra(float precioCompra) {
 		this.precioCompra = precioCompra;
 	}
 
@@ -104,7 +105,7 @@ public class Disco {
 		this.notas = notas;
 	}
 
-	public double getValoracion() {
+	public float getValoracion() {
 		return valoracion;
 	}
 
@@ -204,5 +205,11 @@ public class Disco {
 		this.titulo = titulo;
 	}
 	
-	
+	public String getCodigoColeccion() {
+		return codigoColeccion;
+	}
+
+	public void setCodigoColeccion(String codigoColeccion) {
+		this.codigoColeccion = codigoColeccion;
+	}
 }
