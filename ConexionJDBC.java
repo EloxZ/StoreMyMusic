@@ -32,7 +32,7 @@ public class ConexionJDBC extends ConexionBD{
 		return instanciaInterfaz;
 	}
 	
-	/*public int añadirDisco(Disco dis) {
+	/*public int aÃ±adirDisco(Disco dis) {
 		int discoID = 0;
 		String insertBody = "INSERT INTO Discos(Titulo) VALUES(?)";
 		try {
@@ -49,14 +49,14 @@ public class ConexionJDBC extends ConexionBD{
 		return discoID;
 	}*/
 	
-	public int añadirDisco(Disco dis) {
+	public int aÃ±adirDisco(Disco dis) {
 		int discoID = 0;
 		java.sql.Date fecha2 = null;
 		if(dis.getFechaCompra() != null) {
 			fecha2 = java.sql.Date.valueOf(dis.getFechaCompra());
 		}
 		 
-		String insertBody = "INSERT INTO Discos(Titulo,AñoSalida,AñoEdicion,NumeroCatalogo,CodigoBarras,CodigoColeccion,FechaCompra,PrecioCompra,Notas,Valoracion,PaisEdicion,PosicionEnUbicacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertBody = "INSERT INTO Discos(Titulo,AÃ±oSalida,AÃ±oEdicion,NumeroCatalogo,CodigoBarras,CodigoColeccion,FechaCompra,PrecioCompra,Notas,Valoracion,PaisEdicion,PosicionEnUbicacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
 			texto.setString(1, dis.getTitulo());
@@ -65,12 +65,12 @@ public class ConexionJDBC extends ConexionBD{
             		texto.setString(4, dis.getNumeroCatalogo());
           	        texto.setString(5,dis.getCodigoBarras());
            	        texto.setString(6,dis.getCodigoColeccion());
-                        texto.setDate(7, (fecha2));
-                        texto.setFloat(8, dis.getPrecioCompra());
-                        texto.setString(9, dis.getNotas());
-                        texto.setFloat(10, dis.getValoracion());
-                        texto.setString(11, dis.getPaisEdicion());
-                        texto.setString(12, dis.getPosicionEnUbicacion());
+                    texto.setDate(7, (fecha2));
+                    texto.setFloat(8, dis.getPrecioCompra());
+                    texto.setString(9, dis.getNotas());
+                    texto.setFloat(10, dis.getValoracion());
+                    texto.setString(11, dis.getPaisEdicion());
+                    texto.setString(12, dis.getPosicionEnUbicacion());
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
@@ -95,10 +95,10 @@ public class ConexionJDBC extends ConexionBD{
 		}
 	}
 	
-	public void insertarDatosDisco (Disco dis, int id, String fecha) {
-		java.sql.Date fecha2 = java.sql.Date.valueOf(fecha);
+	public void insertarDatosDisco (Disco dis, int id) {
+		java.sql.Date fecha2 = java.sql.Date.valueOf(dis.getFechaCompra());
         //Le das un disco y modifica todas sus variables auxiliares en la Base de Datos
-        String insertBody = "UPDATE Discos SET AñoSalida = ?, AñoEdicion = ?, NumeroCatalogo = ?, CodigoBarras = ?, CodigoColeccion = ?, FechaCompra = ?, PrecioCompra = ?, Notas = ?, Valoracion = ?, PaisEdicion = ?, PosicionEnUbicacion = ?  WHERE idDisco = ?";
+        String insertBody = "UPDATE Discos SET AÃ±oSalida = ?, AÃ±oEdicion = ?, NumeroCatalogo = ?, CodigoBarras = ?, CodigoColeccion = ?, FechaCompra = ?, PrecioCompra = ?, Notas = ?, Valoracion = ?, PaisEdicion = ?, PosicionEnUbicacion = ?  WHERE idDisco = ?";
         try 
         {
             
@@ -122,6 +122,38 @@ public class ConexionJDBC extends ConexionBD{
             e.printStackTrace();
         }
     }
+/*SOPORTES*******************************************************************************/
+	public int aÃ±adirSoporte(String nombre, Disco dis) {
+		int soporteID = 0;
+		String query = "INSERT INTO Soportes(NombreSoporte,idDisco) VALUES(?,?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, nombre);
+			texto.setInt(2, dis.getID());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				soporteID = rs.getInt(1);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+		return soporteID;
+	}
+	
+	public void eliminarSoporte(int id) {
+		String query = "DELETE FROM Soportes WHERE (idSoporte = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//Falta el metodo que devuelve la lista
 	
 /*AUTORES*********************************************************************************/	
 
@@ -154,7 +186,7 @@ public class ConexionJDBC extends ConexionBD{
 		return lAutores;
 	}
 	
-	public int añadirAutor(Autor a) {
+	public int aÃ±adirAutor(Autor a) {
 		int autorID = 0;
 		String insertBody = "INSERT INTO Autores (NombreAutor,Nacionalidad) VALUES(?,?)";
 		try {
@@ -236,7 +268,7 @@ public class ConexionJDBC extends ConexionBD{
 	        return discos;
 	}
 	
-	public void añadirDatosAdquisicion(int id, String fecha, int precio) {
+	public void aÃ±adirDatosAdquisicion(int id, String fecha, int precio) {
 		//fecha tiene que ser un String de formato YYYY-MM-DD
 		String query = "UPDATE Discos SET FechaCompra = ?, PrecioCompra = ? WHERE idDisco = ?";
 		java.sql.Date fecha2 = java.sql.Date.valueOf(fecha);
@@ -251,7 +283,7 @@ public class ConexionJDBC extends ConexionBD{
 		}
 	}
 	
-	public void añadirNotasValoracion(int id, String nota, float valoracion) {
+	public void aÃ±adirNotasValoracion(int id, String nota, float valoracion) {
 			String query = "UPDATE Discos SET Notas = ?, Valoracion = ? WHERE idDisco = ?";
 		try {
 			PreparedStatement texto = conn.prepareStatement(query);
@@ -294,7 +326,7 @@ public class ConexionJDBC extends ConexionBD{
 		return lAmigos;
 	}
 	
-	public int añadirAmigo(Amigo a) {
+	public int aÃ±adirAmigo(Amigo a) {
 		int amigoID = 0;
 		String insertBody = "INSERT INTO Amigos (NombreAmigo) VALUES(?)";
 		try {
@@ -338,11 +370,11 @@ public class ConexionJDBC extends ConexionBD{
 
 	/***************************************************************************************/
 	
-	/*CATEGORÍAS*********************************************************************************/	
+	/*CATEGORÃƒï¿½AS*********************************************************************************/	
 
 	public List<Categoria> listaCategorias() {
 		ArrayList<Categoria> lCategorias = new ArrayList<>();
-		String selectQueryBody = "SELECT * FROM Categorías";
+		String selectQueryBody = "SELECT * FROM CategorÃƒÂ­as";
 		Statement querySt;
 		try {
 			querySt = conn.createStatement();
@@ -359,7 +391,7 @@ public class ConexionJDBC extends ConexionBD{
 				}
 			}
 			System.out.println(lCategorias);
-			System.out.println("Importadas "+cont+" categorías");
+			System.out.println("Importadas "+cont+" categorÃƒÂ­as");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -368,9 +400,9 @@ public class ConexionJDBC extends ConexionBD{
 		return lCategorias;
 	}
 	
-	public int añadirCategoria(Categoria c) {
+	public int aÃ±adirCategoria(Categoria c) {
 		int categoriaID = 0;
-		String insertBody = "INSERT INTO Categorías (NombreCategoria) VALUES(?)";
+		String insertBody = "INSERT INTO CategorÃƒÂ­as (NombreCategoria) VALUES(?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
 			texto.setString(1, c.getNombre());
@@ -386,7 +418,7 @@ public class ConexionJDBC extends ConexionBD{
 	}	
 	
 	public void modificarCategoria(int id, String nombre) {
-		String query = "UPDATE Categorías SET nombreCategoria = ? WHERE idCategoria = ?";
+		String query = "UPDATE CategorÃƒÂ­as SET nombreCategoria = ? WHERE idCategoria = ?";
 		try {
 			PreparedStatement texto = conn.prepareStatement(query);
 			texto.setInt(2, id);
@@ -412,11 +444,11 @@ public class ConexionJDBC extends ConexionBD{
 
 	/***************************************************************************************/
 	
-	/*DISCOGRÁFICAS*********************************************************************************/	
+	/*DISCOGRÃƒï¿½FICAS*********************************************************************************/	
 
 	public List<Discografica> listaDiscograficas() {
 		ArrayList<Discografica> lDiscograficas = new ArrayList<>();
-		String selectQueryBody = "SELECT * FROM Discográficas";
+		String selectQueryBody = "SELECT * FROM DiscogrÃƒÂ¡ficas";
 		Statement querySt;
 		try {
 			querySt = conn.createStatement();
@@ -433,7 +465,7 @@ public class ConexionJDBC extends ConexionBD{
 				}
 			}
 			System.out.println(lDiscograficas);
-			System.out.println("Importadas "+cont+" discográficas");
+			System.out.println("Importadas "+cont+" discogrÃƒÂ¡ficas");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -442,25 +474,25 @@ public class ConexionJDBC extends ConexionBD{
 		return lDiscograficas;
 	}
 	
-	public int añadirDiscografica(Discografica d) {
-		int discograficaID = 0;
-		String insertBody = "INSERT INTO Discográficas (NombreDiscografica) VALUES(?)";
+	public int aÃ±adirDiscografica(Discografica d) {
+		int categoriaID = 0;
+		String insertBody = "INSERT INTO DiscogrÃƒÂ¡ficas (NombreDiscografica) VALUES(?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
 			texto.setString(1, d.getNombre());
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
-				discograficaID = rs.getInt(1);
+				categoriaID = rs.getInt(1);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return discograficaID;
+		return categoriaID;
 	}	
 	
 	public void modificarDiscografica(int id, String nombre) {
-		String query = "UPDATE Discográficas SET nombreDiscografica = ? WHERE idDiscografica = ?";
+		String query = "UPDATE DiscogrÃƒÂ¡ficas SET nombreDiscografica = ? WHERE idDiscografica = ?";
 		try {
 			PreparedStatement texto = conn.prepareStatement(query);
 			texto.setInt(2, id);
@@ -474,7 +506,7 @@ public class ConexionJDBC extends ConexionBD{
 	public void eliminarDiscografica(int id) {
 		//int discoID = dis.getID();
 		//System.out.println(discoID);
-		String deleteBody = "DELETE FROM Discográficas WHERE (idDiscografica = ?)";
+		String deleteBody = "DELETE FROM DiscogrÃƒÂ¡ficas WHERE (idDiscografica = ?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(deleteBody);
 			texto.setInt(1, id);
@@ -516,8 +548,8 @@ public class ConexionJDBC extends ConexionBD{
 		return lFormatos;
 	}
 	
-	public int añadirFormato(Formato f) {
-		int formatoID = 0;
+	public int aÃ±adirFormato(Formato f) {
+		int categoriaID = 0;
 		String insertBody = "INSERT INTO Formatos (NombreFormato) VALUES(?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
@@ -525,12 +557,12 @@ public class ConexionJDBC extends ConexionBD{
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
-				formatoID = rs.getInt(1);
+				categoriaID = rs.getInt(1);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return formatoID;
+		return categoriaID;
 	}	
 	
 	public void modificarFormato(int id, String nombre) {
@@ -560,11 +592,11 @@ public class ConexionJDBC extends ConexionBD{
 
 	/***************************************************************************************/
 	
-	/*GÉNEROS*********************************************************************************/	
+	/*GÃƒâ€°NEROS*********************************************************************************/	
 
 	public List<Genero> listaGeneros() {
 		ArrayList<Genero> lGeneros = new ArrayList<>();
-		String selectQueryBody = "SELECT * FROM Géneros";
+		String selectQueryBody = "SELECT * FROM GÃƒÂ©neros";
 		Statement querySt;
 		try {
 			querySt = conn.createStatement();
@@ -581,7 +613,7 @@ public class ConexionJDBC extends ConexionBD{
 				}
 			}
 			System.out.println(lGeneros);
-			System.out.println("Importados "+cont+" géneros");
+			System.out.println("Importados "+cont+" gÃƒÂ©neros");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -590,25 +622,25 @@ public class ConexionJDBC extends ConexionBD{
 		return lGeneros;
 	}
 	
-	public int añadirGenero(Genero g) {
-		int generoID = 0;
-		String insertBody = "INSERT INTO Géneros (NombreGenero) VALUES(?)";
+	public int aÃ±adirGenero(Genero g) {
+		int categoriaID = 0;
+		String insertBody = "INSERT INTO GÃƒÂ©neros (NombreGenero) VALUES(?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
 			texto.setString(1, g.getNombre());
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
-				generoID = rs.getInt(1);
+				categoriaID = rs.getInt(1);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return generoID;
+		return categoriaID;
 	}	
 	
 	public void modificarGenero(int id, String nombre) {
-		String query = "UPDATE Géneros SET nombreGenero = ? WHERE idGenero = ?";
+		String query = "UPDATE GÃƒÂ©neros SET nombreGenero = ? WHERE idGenero = ?";
 		try {
 			PreparedStatement texto = conn.prepareStatement(query);
 			texto.setInt(2, id);
@@ -622,7 +654,7 @@ public class ConexionJDBC extends ConexionBD{
 	public void eliminarGenero(int id) {
 		//int discoID = dis.getID();
 		//System.out.println(discoID);
-		String deleteBody = "DELETE FROM Géneros WHERE (idGenero = ?)";
+		String deleteBody = "DELETE FROM GÃƒÂ©neros WHERE (idGenero = ?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(deleteBody);
 			texto.setInt(1, id);
@@ -664,8 +696,8 @@ public class ConexionJDBC extends ConexionBD{
 		return lTiendas;
 	}
 	
-	public int añadirTienda(Tienda t) {
-		int tiendaID = 0;
+	public int aÃ±adirTienda(Tienda t) {
+		int categoriaID = 0;
 		String insertBody = "INSERT INTO Tiendas (NombreTienda) VALUES(?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
@@ -673,12 +705,12 @@ public class ConexionJDBC extends ConexionBD{
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
-				tiendaID = rs.getInt(1);
+				categoriaID = rs.getInt(1);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return tiendaID;
+		return categoriaID;
 	}	
 	
 	public void modificarTienda(int id, String nombre) {
@@ -738,8 +770,8 @@ public class ConexionJDBC extends ConexionBD{
 		return lUbicaciones;
 	}
 	
-	public int añadirUbicacion(Ubicacion u) {
-		int ubicacionID = 0;
+	public int aÃ±adirUbicacion(Ubicacion u) {
+		int categoriaID = 0;
 		String insertBody = "INSERT INTO Ubicaciones (NombreUbicacion) VALUES(?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
@@ -747,12 +779,12 @@ public class ConexionJDBC extends ConexionBD{
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
-				ubicacionID = rs.getInt(1);
+				categoriaID = rs.getInt(1);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return ubicacionID;
+		return categoriaID;
 	}	
 	
 	public void modificarUbicacion(int id, String nombre) {

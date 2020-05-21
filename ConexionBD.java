@@ -1,5 +1,6 @@
 package sMM;
 
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class ConexionBD {
@@ -12,10 +13,13 @@ public abstract class ConexionBD {
 		static final String PASS = "beyonce";
 		
 		public abstract int añadirDisco(Disco dis);
-		public abstract void insertarDatosDisco (Disco dis, int id, String fecha);
+		public abstract void insertarDatosDisco (Disco dis, int id);
 		public abstract void eliminarDisco(int id);
+		public abstract int añadirSoporte(String nombre, Disco dis);
+		public abstract void eliminarSoporte(int id);
 		public abstract List<Autor> listaAutores();
 		public abstract int añadirAutor(Autor a);
+		public abstract HashMap<Integer, Disco> getDiscos();
 		public abstract void modificarAutor(int id, String nombre, String pais);
 		public abstract void eliminarAutor(int id);
 		public abstract List<Amigo> listaAmigos();
