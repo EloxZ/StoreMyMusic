@@ -277,7 +277,448 @@ public class ConexionJDBC extends ConexionBD{
 
 	/***************************************************************************************/
 	
+	/*CATEGORÍAS*********************************************************************************/	
+
+	public List<Categoria> listaCategorias() {
+		ArrayList<Categoria> lCategorias = new ArrayList<>();
+		String selectQueryBody = "SELECT * FROM Categorías";
+		Statement querySt;
+		try {
+			querySt = conn.createStatement();
+			ResultSet rs = querySt.executeQuery(selectQueryBody);
+			// position result to first
+			int cont = 0;
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					lCategorias.add(new Categoria(id, name));
+					System.out.println(id+" "+name);
+					cont++;
+				}
+			}
+			System.out.println(lCategorias);
+			System.out.println("Importadas "+cont+" categorías");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lCategorias;
+	}
+	
+	public int añadirCategoria(Categoria c) {
+		int categoriaID = 0;
+		String insertBody = "INSERT INTO Categorías (NombreCategoria) VALUES(?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, c.getNombre());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				categoriaID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return categoriaID;
+	}	
+	
+	public void modificarCategoria(int id, String nombre) {
+		String query = "UPDATE Categorías SET nombreCategoria = ? WHERE idCategoria = ?";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(2, id);
+			texto.setString(1, nombre);
+			int res = texto.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarCategoria(int id) {
+		//int discoID = dis.getID();
+		//System.out.println(discoID);
+		String deleteBody = "DELETE FROM Categoria WHERE (idCategoria = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(deleteBody);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/***************************************************************************************/
+	
+	/*DISCOGRÁFICAS*********************************************************************************/	
+
+	public List<Discografica> listaDiscograficas() {
+		ArrayList<Discografica> lDiscograficas = new ArrayList<>();
+		String selectQueryBody = "SELECT * FROM Discográficas";
+		Statement querySt;
+		try {
+			querySt = conn.createStatement();
+			ResultSet rs = querySt.executeQuery(selectQueryBody);
+			// position result to first
+			int cont = 0;
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					lDiscograficas.add(new Discografica(id, name));
+					System.out.println(id+" "+name);
+					cont++;
+				}
+			}
+			System.out.println(lDiscograficas);
+			System.out.println("Importadas "+cont+" discográficas");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lDiscograficas;
+	}
+	
+	public int añadirDiscografica(Discografica d) {
+		int categoriaID = 0;
+		String insertBody = "INSERT INTO Discográficas (NombreDiscografica) VALUES(?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, d.getNombre());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				categoriaID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return categoriaID;
+	}	
+	
+	public void modificarDiscografica(int id, String nombre) {
+		String query = "UPDATE Discográficas SET nombreDiscografica = ? WHERE idDiscografica = ?";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(2, id);
+			texto.setString(1, nombre);
+			int res = texto.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarDiscografica(int id) {
+		//int discoID = dis.getID();
+		//System.out.println(discoID);
+		String deleteBody = "DELETE FROM Discográficas WHERE (idDiscografica = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(deleteBody);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/***************************************************************************************/
+	
+	/*FORMATOS*********************************************************************************/	
+
+	public List<Formato> listaFormatos() {
+		ArrayList<Formato> lFormatos = new ArrayList<>();
+		String selectQueryBody = "SELECT * FROM Formatos";
+		Statement querySt;
+		try {
+			querySt = conn.createStatement();
+			ResultSet rs = querySt.executeQuery(selectQueryBody);
+			// position result to first
+			int cont = 0;
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					lFormatos.add(new Formato(id, name));
+					System.out.println(id+" "+name);
+					cont++;
+				}
+			}
+			System.out.println(lFormatos);
+			System.out.println("Importados "+cont+" formatos");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lFormatos;
+	}
+	
+	public int añadirFormato(Formato f) {
+		int categoriaID = 0;
+		String insertBody = "INSERT INTO Formatos (NombreFormato) VALUES(?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, f.getNombre());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				categoriaID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return categoriaID;
+	}	
+	
+	public void modificarFormato(int id, String nombre) {
+		String query = "UPDATE Formatos SET nombreFormato = ? WHERE idFormato = ?";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(2, id);
+			texto.setString(1, nombre);
+			int res = texto.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarFormato(int id) {
+		//int discoID = dis.getID();
+		//System.out.println(discoID);
+		String deleteBody = "DELETE FROM Formatos WHERE (idFormato = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(deleteBody);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/***************************************************************************************/
+	
+	/*GÉNEROS*********************************************************************************/	
+
+	public List<Genero> listaGeneros() {
+		ArrayList<Genero> lGeneros = new ArrayList<>();
+		String selectQueryBody = "SELECT * FROM Géneros";
+		Statement querySt;
+		try {
+			querySt = conn.createStatement();
+			ResultSet rs = querySt.executeQuery(selectQueryBody);
+			// position result to first
+			int cont = 0;
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					lGeneros.add(new Genero(id, name));
+					System.out.println(id+" "+name);
+					cont++;
+				}
+			}
+			System.out.println(lGeneros);
+			System.out.println("Importados "+cont+" géneros");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lGeneros;
+	}
+	
+	public int añadirGenero(Genero g) {
+		int categoriaID = 0;
+		String insertBody = "INSERT INTO Géneros (NombreGenero) VALUES(?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, g.getNombre());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				categoriaID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return categoriaID;
+	}	
+	
+	public void modificarGenero(int id, String nombre) {
+		String query = "UPDATE Géneros SET nombreGenero = ? WHERE idGenero = ?";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(2, id);
+			texto.setString(1, nombre);
+			int res = texto.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarGenero(int id) {
+		//int discoID = dis.getID();
+		//System.out.println(discoID);
+		String deleteBody = "DELETE FROM Géneros WHERE (idGenero = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(deleteBody);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/***************************************************************************************/
+	
+	/*TIENDAS*********************************************************************************/	
+
+	public List<Tienda> listaTiendas() {
+		ArrayList<Tienda> lTiendas = new ArrayList<>();
+		String selectQueryBody = "SELECT * FROM Tiendas";
+		Statement querySt;
+		try {
+			querySt = conn.createStatement();
+			ResultSet rs = querySt.executeQuery(selectQueryBody);
+			// position result to first
+			int cont = 0;
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					lTiendas.add(new Tienda(id, name));
+					System.out.println(id+" "+name);
+					cont++;
+				}
+			}
+			System.out.println(lTiendas);
+			System.out.println("Importadas "+cont+" tiendas");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lTiendas;
+	}
+	
+	public int añadirTienda(Tienda t) {
+		int categoriaID = 0;
+		String insertBody = "INSERT INTO Tiendas (NombreTienda) VALUES(?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, t.getNombre());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				categoriaID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return categoriaID;
+	}	
+	
+	public void modificarTienda(int id, String nombre) {
+		String query = "UPDATE Tiendas SET nombreTienda = ? WHERE idTienda = ?";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(2, id);
+			texto.setString(1, nombre);
+			int res = texto.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarTienda(int id) {
+		//int discoID = dis.getID();
+		//System.out.println(discoID);
+		String deleteBody = "DELETE FROM Tiendas WHERE (idTienda = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(deleteBody);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/***************************************************************************************/
+	
+	/*UBICACIONES*********************************************************************************/	
+
+	public List<Ubicacion> listaUbicaciones() {
+		ArrayList<Ubicacion> lUbicaciones = new ArrayList<>();
+		String selectQueryBody = "SELECT * FROM Ubicaciones";
+		Statement querySt;
+		try {
+			querySt = conn.createStatement();
+			ResultSet rs = querySt.executeQuery(selectQueryBody);
+			// position result to first
+			int cont = 0;
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					lUbicaciones.add(new Ubicacion(id, name));
+					System.out.println(id+" "+name);
+					cont++;
+				}
+			}
+			System.out.println(lUbicaciones);
+			System.out.println("Importadas "+cont+" ubicaciones");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lUbicaciones;
+	}
+	
+	public int añadirUbicacion(Ubicacion u) {
+		int categoriaID = 0;
+		String insertBody = "INSERT INTO Ubicaciones (NombreUbicacion) VALUES(?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setString(1, u.getNombre());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				categoriaID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return categoriaID;
+	}	
+	
+	public void modificarUbicacion(int id, String nombre) {
+		String query = "UPDATE Ubicaciones SET nombreUbicacion = ? WHERE idUbicacion = ?";
+		try {
+			PreparedStatement texto = conn.prepareStatement(query);
+			texto.setInt(2, id);
+			texto.setString(1, nombre);
+			int res = texto.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarUbicacion(int id) {
+		//int discoID = dis.getID();
+		//System.out.println(discoID);
+		String deleteBody = "DELETE FROM Ubicaciones WHERE (idUbicacion = ?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(deleteBody);
+			texto.setInt(1, id);
+			int res = texto.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/***************************************************************************************/
 	
 }
-	
-
