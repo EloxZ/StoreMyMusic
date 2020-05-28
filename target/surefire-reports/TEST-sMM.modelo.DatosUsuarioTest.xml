@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="18" failures="17" name="sMM.modelo.DatosUsuarioTest" time="0.012" errors="0" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin"/>
+    <property name="java.vm.version" value="25.191-b12"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\Eloy\Documents\NetBeansProjects\StoreMyMusic"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="test" value="sMM.modelo.DatosUsuarioTest"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Users\Eloy\Documents\NetBeansProjects\StoreMyMusic"/>
+    <property name="java.runtime.version" value="1.8.0_191-b12"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\Eloy\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans-11.3\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\Program Files\NetBeans-11.3\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="C:\Program Files\NetBeans-11.3\netbeans\java\maven\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Haskell\bin;C:\Program Files\Haskell Platform\8.6.5\lib\extralibs\bin;C:\Program Files\Haskell Platform\8.6.5\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Haskell Platform\8.6.5\mingw\bin;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Program Files (x86)\Calibre2\;C:\Program Files\Git\cmd;C:\Users\Eloy\AppData\Local\Programs\Python\Python38-32\Scripts\;C:\Users\Eloy\AppData\Local\Programs\Python\Python38-32\;C:\Users\Eloy\AppData\Roaming\cabal\bin;C:\Users\Eloy\AppData\Roaming\local\bin;C:\Users\Eloy\AppData\Local\Microsoft\WindowsApps;C:\Users\Eloy\AppData\Local\GitHubDesktop\bin;C:\Users\Eloy\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Eloy\AppData\Local\Microsoft\WindowsApps;C:\Users\Eloy\AppData\Local\atom\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.4\bin;;."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\Eloy"/>
+    <property name="user.timezone" value="Europe/Paris"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="Eloy"/>
+    <property name="java.class.path" value="C:\Program Files\NetBeans-11.3\netbeans\java\maven\boot\plexus-classworlds-2.5.2.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_191\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=sMM.modelo.DatosUsuarioTest -Dmaven.ext.class.path=C:\Program Files\NetBeans-11.3\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\Program Files\NetBeans-11.3\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 -Prelease-profile surefire:test"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="es"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_191"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_191\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\Program Files\NetBeans-11.3\netbeans\java\maven"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testAddDisco" time="0.002">
+    <failure type="java.lang.NullPointerException">java.lang.NullPointerException
+	at sMM.modelo.DatosUsuario.addDisco(DatosUsuario.java:73)
+	at sMM.modelo.DatosUsuarioTest.testAddDisco(DatosUsuarioTest.java:207)
+</failure>
+    <system-out>addDisco
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testGetTiendas" time="0.003">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetTiendas(DatosUsuarioTest.java:156)
+</failure>
+    <system-out>getTiendas
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testSetDiscos" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetDiscos(DatosUsuarioTest.java:237)
+</failure>
+    <system-out>setDiscos
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testSetTiendas" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetTiendas(DatosUsuarioTest.java:169)
+</failure>
+    <system-out>setTiendas
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testGetUbicacion" time="0">
+    <failure type="java.lang.NullPointerException">java.lang.NullPointerException
+	at sMM.modelo.DatosUsuario.getUbicacion(DatosUsuario.java:53)
+	at sMM.modelo.DatosUsuarioTest.testGetUbicacion(DatosUsuarioTest.java:139)
+</failure>
+    <system-out>getUbicacion
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testSetAutores" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetAutores(DatosUsuarioTest.java:264)
+</failure>
+    <system-out>setAutores
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testGetDiscos" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetDiscos(DatosUsuarioTest.java:291)
+</failure>
+    <system-out>getDiscos
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testGetAutores" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetAutores(DatosUsuarioTest.java:251)
+</failure>
+    <system-out>getAutores
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testExisteAutor" time="0.001"/>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testGetCategorias" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetCategorias(DatosUsuarioTest.java:69)
+</failure>
+    <system-out>getCategorias
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testSetCategorias" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetCategorias(DatosUsuarioTest.java:82)
+</failure>
+    <system-out>setCategorias
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testSetAutoresDiscos" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetAutoresDiscos(DatosUsuarioTest.java:277)
+</failure>
+    <system-out>setAutoresDiscos
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testStringAutoresDisco" time="0.001">
+    <failure type="java.lang.NullPointerException">java.lang.NullPointerException
+	at sMM.modelo.DatosUsuario.stringAutoresDisco(DatosUsuario.java:78)
+	at sMM.modelo.DatosUsuarioTest.testStringAutoresDisco(DatosUsuarioTest.java:221)
+</failure>
+    <system-out>stringAutoresDisco
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testGetAutoresDiscos" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetAutoresDiscos(DatosUsuarioTest.java:305)
+</failure>
+    <system-out>getAutoresDiscos
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testGetDiscograficas" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetDiscograficas(DatosUsuarioTest.java:183)
+</failure>
+    <system-out>getDiscograficas
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testSetDiscograficas" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetDiscograficas(DatosUsuarioTest.java:196)
+</failure>
+    <system-out>setDiscograficas
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testGetUbicaciones" time="0">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetUbicaciones(DatosUsuarioTest.java:114)
+</failure>
+    <system-out>getUbicaciones
+</system-out>
+  </testcase>
+  <testcase classname="sMM.modelo.DatosUsuarioTest" name="sMM.modelo.DatosUsuarioTest.testSetUbicaciones" time="0.001">
+    <failure message="The test case is a prototype." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetUbicaciones(DatosUsuarioTest.java:127)
+</failure>
+    <system-out>setUbicaciones
+</system-out>
+  </testcase>
+</testsuite>

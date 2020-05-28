@@ -1,0 +1,103 @@
+-------------------------------------------------------------------------------
+Test set: sMM.modelo.DatosUsuarioTest
+-------------------------------------------------------------------------------
+Tests run: 18, Failures: 17, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec <<< FAILURE!
+sMM.modelo.DatosUsuarioTest.testAddDisco()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at sMM.modelo.DatosUsuario.addDisco(DatosUsuario.java:73)
+	at sMM.modelo.DatosUsuarioTest.testAddDisco(DatosUsuarioTest.java:207)
+
+sMM.modelo.DatosUsuarioTest.testGetTiendas()  Time elapsed: 0.003 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetTiendas(DatosUsuarioTest.java:156)
+
+sMM.modelo.DatosUsuarioTest.testSetDiscos()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetDiscos(DatosUsuarioTest.java:237)
+
+sMM.modelo.DatosUsuarioTest.testSetTiendas()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetTiendas(DatosUsuarioTest.java:169)
+
+sMM.modelo.DatosUsuarioTest.testGetUbicacion()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at sMM.modelo.DatosUsuario.getUbicacion(DatosUsuario.java:53)
+	at sMM.modelo.DatosUsuarioTest.testGetUbicacion(DatosUsuarioTest.java:139)
+
+sMM.modelo.DatosUsuarioTest.testSetAutores()  Time elapsed: 0.001 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetAutores(DatosUsuarioTest.java:264)
+
+sMM.modelo.DatosUsuarioTest.testGetDiscos()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetDiscos(DatosUsuarioTest.java:291)
+
+sMM.modelo.DatosUsuarioTest.testGetAutores()  Time elapsed: 0.001 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetAutores(DatosUsuarioTest.java:251)
+
+sMM.modelo.DatosUsuarioTest.testGetCategorias()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetCategorias(DatosUsuarioTest.java:69)
+
+sMM.modelo.DatosUsuarioTest.testSetCategorias()  Time elapsed: 0.001 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetCategorias(DatosUsuarioTest.java:82)
+
+sMM.modelo.DatosUsuarioTest.testSetAutoresDiscos()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetAutoresDiscos(DatosUsuarioTest.java:277)
+
+sMM.modelo.DatosUsuarioTest.testStringAutoresDisco()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at sMM.modelo.DatosUsuario.stringAutoresDisco(DatosUsuario.java:78)
+	at sMM.modelo.DatosUsuarioTest.testStringAutoresDisco(DatosUsuarioTest.java:221)
+
+sMM.modelo.DatosUsuarioTest.testGetAutoresDiscos()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetAutoresDiscos(DatosUsuarioTest.java:305)
+
+sMM.modelo.DatosUsuarioTest.testGetDiscograficas()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetDiscograficas(DatosUsuarioTest.java:183)
+
+sMM.modelo.DatosUsuarioTest.testSetDiscograficas()  Time elapsed: 0.001 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetDiscograficas(DatosUsuarioTest.java:196)
+
+sMM.modelo.DatosUsuarioTest.testGetUbicaciones()  Time elapsed: 0 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testGetUbicaciones(DatosUsuarioTest.java:114)
+
+sMM.modelo.DatosUsuarioTest.testSetUbicaciones()  Time elapsed: 0.001 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: The test case is a prototype.
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:109)
+	at sMM.modelo.DatosUsuarioTest.testSetUbicaciones(DatosUsuarioTest.java:127)
+
