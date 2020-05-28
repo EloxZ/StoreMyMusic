@@ -32,6 +32,12 @@ public class DatosUsuario {
     public HashMap<Integer, Genero> getGeneros() {
         return generos;
     }
+    
+    public void setGeneros(HashMap<Integer, Genero> generos) {
+        this.generos = generos;
+    }
+    
+    
 
     public void setCategorias(HashMap<Integer, Categoria> categorias) {
         this.categorias = categorias;
