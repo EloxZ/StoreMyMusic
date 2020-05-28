@@ -321,8 +321,8 @@ public class ConexionJDBC extends ConexionBD{
 	
 	/*AMIGOS*********************************************************************************/	
 
-	public ArrayList<Amigo> listaAmigos() {
-		ArrayList<Amigo> lAmigos = new ArrayList<>();
+	public HashMap<Integer,Amigo> listaAmigos() {
+		HashMap<Integer,Amigo> lAmigos = new HashMap<Integer,Amigo>();
 		String selectQueryBody = "SELECT * FROM Amigos";
 		Statement querySt;
 		try {
@@ -334,7 +334,7 @@ public class ConexionJDBC extends ConexionBD{
 				while (rs.next()) {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
-					lAmigos.add(new Amigo(id, name));
+					lAmigos.put(id,new Amigo(id, name));
 					System.out.println(id+" "+name);
 					cont++;
 				}
@@ -543,8 +543,8 @@ public class ConexionJDBC extends ConexionBD{
 	
 	/*FORMATOS*********************************************************************************/	
 
-	public ArrayList<Formato> listaFormatos() {
-		ArrayList<Formato> lFormatos = new ArrayList<>();
+	public HashMap<Integer,Formato> listaFormatos() {
+		HashMap<Integer,Formato> lFormatos = new HashMap<>();
 		String selectQueryBody = "SELECT * FROM Formatos";
 		Statement querySt;
 		try {
@@ -556,7 +556,7 @@ public class ConexionJDBC extends ConexionBD{
 				while (rs.next()) {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
-					lFormatos.add(new Formato(id, name));
+					lFormatos.put(id,new Formato(id, name));
 					System.out.println(id+" "+name);
 					cont++;
 				}
