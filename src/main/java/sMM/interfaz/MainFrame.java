@@ -76,6 +76,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         ConexionBD bd = ConexionJDBC.getInstance();
         du = new DatosUsuario();
         du.setDiscos(bd.getDiscos());
+        du.setGeneros(bd.listaGeneros());
         du.setAutores(bd.listaAutores());
         du.setAutoresDiscos(bd.getAutoresDiscos());
         du.setCategorias(bd.listaCategorias());
