@@ -617,8 +617,8 @@ public class ConexionJDBC extends ConexionBD{
 	
 	/*GÉNEROS*********************************************************************************/	
 
-	public ArrayList<Genero> listaGeneros() {
-		ArrayList<Genero> lGeneros = new ArrayList<>();
+	public HashMap<Integer,Genero> listaGeneros() {
+		HashMap<Integer,Genero> lGeneros = new HashMap<Integer,Genero>();
 		String selectQueryBody = "SELECT * FROM Géneros";
 		Statement querySt;
 		try {
@@ -630,7 +630,7 @@ public class ConexionJDBC extends ConexionBD{
 				while (rs.next()) {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
-					lGeneros.add(new Genero(id, name));
+					lGeneros.put(id, new Genero(id, name));
 					System.out.println(id+" "+name);
 					cont++;
 				}

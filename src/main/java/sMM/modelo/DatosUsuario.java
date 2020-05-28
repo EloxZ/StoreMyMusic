@@ -23,9 +23,14 @@ public class DatosUsuario {
     private HashMap<Integer,Categoria> categorias;
     private HashMap<Integer,Ubicacion> ubicaciones;
     private HashMap<Integer,Tienda> tiendas;
+    private HashMap<Integer,Genero> generos;
 
     public HashMap<Integer, Categoria> getCategorias() {
         return categorias;
+    }
+    
+    public HashMap<Integer, Genero> getGeneros() {
+        return generos;
     }
 
     public void setCategorias(HashMap<Integer, Categoria> categorias) {

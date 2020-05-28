@@ -48,7 +48,7 @@ public abstract class ConexionBD {
 		public abstract int añadirFormato(Formato f);
 		public abstract void modificarFormato(int id, String nombre);
 		public abstract void eliminarFormato(int id);
-		public abstract ArrayList<Genero> listaGeneros();
+		public abstract HashMap<Integer,Genero> listaGeneros();
 		public abstract int añadirGenero(Genero g);
 		public abstract void modificarGenero(int id, String nombre);
 		public abstract void eliminarGenero(int id);
