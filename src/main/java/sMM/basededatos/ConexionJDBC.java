@@ -321,8 +321,8 @@ public class ConexionJDBC extends ConexionBD{
 	
 	/*AMIGOS*********************************************************************************/	
 
-	public ArrayList<Amigo> listaAmigos() {
-		ArrayList<Amigo> lAmigos = new ArrayList<>();
+	public HashMap<Integer,Amigo> listaAmigos() {
+		HashMap<Integer,Amigo> lAmigos = new HashMap<Integer,Amigo>();
 		String selectQueryBody = "SELECT * FROM Amigos";
 		Statement querySt;
 		try {
@@ -334,7 +334,7 @@ public class ConexionJDBC extends ConexionBD{
 				while (rs.next()) {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
-					lAmigos.add(new Amigo(id, name));
+					lAmigos.put(id, new Amigo(id, name));
 					System.out.println(id+" "+name);
 					cont++;
 				}
@@ -543,8 +543,8 @@ public class ConexionJDBC extends ConexionBD{
 	
 	/*FORMATOS*********************************************************************************/	
 
-	public ArrayList<Formato> listaFormatos() {
-		ArrayList<Formato> lFormatos = new ArrayList<>();
+	public HashMap<Integer,Formato> listaFormatos() {
+		HashMap<Integer,Formato> lFormatos = new HashMap<Integer,Formato>();
 		String selectQueryBody = "SELECT * FROM Formatos";
 		Statement querySt;
 		try {
@@ -556,7 +556,8 @@ public class ConexionJDBC extends ConexionBD{
 				while (rs.next()) {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
-					lFormatos.add(new Formato(id, name));
+                                        
+					lFormatos.put(id, new Formato(id, name));
 					System.out.println(id+" "+name);
 					cont++;
 				}
@@ -617,8 +618,8 @@ public class ConexionJDBC extends ConexionBD{
 	
 	/*GÉNEROS*********************************************************************************/	
 
-	public ArrayList<Genero> listaGeneros() {
-		ArrayList<Genero> lGeneros = new ArrayList<>();
+	public HashMap<Integer,Genero> listaGeneros() {
+		HashMap<Integer,Genero> lGeneros = new HashMap<Integer,Genero>();
 		String selectQueryBody = "SELECT * FROM Géneros";
 		Statement querySt;
 		try {
@@ -630,7 +631,7 @@ public class ConexionJDBC extends ConexionBD{
 				while (rs.next()) {
 					int id = rs.getInt(1);
 					String name = rs.getString(2);
-					lGeneros.add(new Genero(id, name));
+					lGeneros.put(id,new Genero(id, name));
 					System.out.println(id+" "+name);
 					cont++;
 				}

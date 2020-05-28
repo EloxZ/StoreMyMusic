@@ -32,7 +32,7 @@ public abstract class ConexionBD {
 		public abstract int añadirAutor(Autor a);
 		public abstract void modificarAutor(int id, String nombre, String pais);
 		public abstract void eliminarAutor(int id);
-		public abstract ArrayList<Amigo> listaAmigos();
+		public abstract HashMap<Integer,Amigo> listaAmigos();
 		public abstract int añadirAmigo(Amigo a);
 		public abstract void modificarAmigo(int id, String nombre);
 		public abstract void eliminarAmigo(int id);
@@ -44,11 +44,11 @@ public abstract class ConexionBD {
 		public abstract int añadirDiscografica(Discografica d);
 		public abstract void modificarDiscografica(int id, String nombre);
 		public abstract void eliminarDiscografica(int id);
-		public abstract ArrayList<Formato> listaFormatos();
+		public abstract HashMap<Integer,Formato> listaFormatos();
 		public abstract int añadirFormato(Formato f);
 		public abstract void modificarFormato(int id, String nombre);
 		public abstract void eliminarFormato(int id);
-		public abstract ArrayList<Genero> listaGeneros();
+		public abstract HashMap<Integer,Genero> listaGeneros();
 		public abstract int añadirGenero(Genero g);
 		public abstract void modificarGenero(int id, String nombre);
 		public abstract void eliminarGenero(int id);
