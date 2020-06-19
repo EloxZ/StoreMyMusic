@@ -39,7 +39,10 @@ private int idDisco;
 	private List<Genero> generos;
 	private List<Autor> autores;
 	private List<Soporte> soportes;
-	private List<Prestamo> prestamos;
+        private boolean enListaDeseos;
+        private boolean favorito;
+        private boolean prestado;
+	//private List<Prestamo> prestamos;
 	private Estado estado;
 	
 	public Disco(String st) {
@@ -210,13 +213,7 @@ private int idDisco;
 		this.soportes = soportes;
 	}
 
-	public List<Prestamo> getPrestamos() {
-		return prestamos;
-	}
 
-	public void setPrestamos(List<Prestamo> prestamos) {
-		this.prestamos = prestamos;
-	}
 
 	public Estado getEstado() {
 		return estado;
@@ -237,4 +234,38 @@ private int idDisco;
 	public void setCodigoColeccion(String codigoColeccion) {
 		this.codigoColeccion = codigoColeccion;
 	}
+
+    public int getIdDisco() {
+        return idDisco;
+    }
+
+    public boolean getEnListaDeseos() {
+        return enListaDeseos;
+    }
+
+    public boolean getFavorito() {
+        return favorito;
+    }
+
+    public boolean getPrestado() {
+        return prestado;
+    }
+
+    public void setIdDisco(int idDisco) {
+        this.idDisco = idDisco;
+    }
+
+    public void setEnListaDeseos(boolean enListaDeseos) {
+        this.enListaDeseos = enListaDeseos;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
+    }
+
+    public void setPrestado(boolean prestado) {
+        this.prestado = prestado;
+    }
+        
+        
 }

@@ -28,7 +28,7 @@ public class DatosUsuario {
     private HashMap<Integer,Amigo> amigos;
     private HashMap<Integer,Soporte> soportes;
     private HashMap<Integer,Formato> formatos;
-    
+  
     
     
     public ArrayList<Pair<Integer, Integer>> getGenerosDiscos() {
