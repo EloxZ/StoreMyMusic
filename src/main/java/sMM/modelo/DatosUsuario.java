@@ -27,13 +27,10 @@ public class DatosUsuario {
     private HashMap<Integer,Genero> generos;
     private HashMap<Integer,Amigo> amigos;
     private HashMap<Integer,Soporte> soportes;
-<<<<<<< HEAD
     private HashMap<Integer,Formato> formatos;
   
     
-=======
     private HashMap<Integer,Cancion> canciones;
-    private HashMap<Integer,Formato> formatos;
     
     
     public HashMap<Integer, Cancion> getCanciones() {
@@ -44,9 +41,7 @@ public class DatosUsuario {
         this.canciones = canciones;
     }
     
-    
->>>>>>> Eloy-Branch
-    
+   
     public ArrayList<Pair<Integer, Integer>> getGenerosDiscos() {
         return generosDiscos;
     }

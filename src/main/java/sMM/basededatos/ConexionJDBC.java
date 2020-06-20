@@ -46,8 +46,6 @@ public class ConexionJDBC extends ConexionBD{
         return instanciaInterfaz;
     }
 
-<<<<<<< HEAD
-=======
     /***************************************************************************************/
     /****CANCIONES***************************************************************************/
        
@@ -134,7 +132,7 @@ public class ConexionJDBC extends ConexionBD{
             e.printStackTrace();
         }
     }
->>>>>>> Eloy-Branch
+
 
     public ArrayList<Pair<Integer,Integer>>  getAutoresDiscos() {
         ArrayList<Pair<Integer,Integer>> ad = new ArrayList<>();
