@@ -24,9 +24,15 @@ public abstract class ConexionBD {
 		static final String USER = "santana";
 		static final String PASS = "beyonce";
 		
+<<<<<<< HEAD
                                                 public abstract HashMap<Integer,Disco> getDiscos();
                                                 public abstract ArrayList<Pair<Integer,Integer>>  getAutoresDiscos();
                 		public abstract int añadirDisco(Disco dis);
+=======
+                public abstract HashMap<Integer,Disco> getDiscos();
+                public abstract ArrayList<Pair<Integer,Integer>>  getAutoresDiscos();
+                public abstract int añadirDisco(Disco dis);
+>>>>>>> Eloy-Branch
 		public abstract void insertarDatosDisco (Disco dis, int id);
 		public abstract void eliminarDisco(int id);
 		public abstract HashMap<Integer,Autor> listaAutores();
@@ -74,4 +80,11 @@ public abstract class ConexionBD {
                 public abstract void insertarDatosAdquisicion(int id, String codCol, String fechaCompra, float precio, int tienda);
                 public abstract void modificarDisco(Disco dis);
                 public abstract void eliminarGenerosAutoresDisco(int id);
+<<<<<<< HEAD
+=======
+                public abstract HashMap<Integer,Cancion> listaCanciones();
+                public abstract int añadirCancion (Cancion c);
+                public abstract void modificarCancion(int id, int tr, String titulo, String aut, int dur, String not, double val, int idSop);
+                public abstract void eliminarCancion(int id);
+>>>>>>> Eloy-Branch
 }
