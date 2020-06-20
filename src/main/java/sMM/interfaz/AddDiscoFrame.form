@@ -218,6 +218,11 @@
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
+                                          <Component id="valoracionField" min="-2" pref="157" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="CheckBoxDeseados" min="-2" pref="157" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="posField" min="-2" pref="157" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
@@ -225,19 +230,26 @@
                                                   <Component id="portadaLabel" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="discograficaField" min="-2" pref="157" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="AceptarButton" min="-2" pref="75" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="discograficaField" min="-2" pref="157" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="CheckBoxFavorito" min="-2" pref="115" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <Component id="valoracionField" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                                      <Component id="portadaField" min="-2" pref="157" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="portadaField" min="-2" pref="157" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="CheckBoxPrestado" min="-2" pref="115" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="AceptarButton" min="-2" pref="75" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace pref="49" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -340,7 +352,7 @@
                               <Component id="posField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="discograficaField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="valoracionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="notaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -348,14 +360,23 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="valoracionField" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="valoracionField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="CheckBoxDeseados" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="portadaLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="portadaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="CheckBoxFavorito" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                  <Component id="portadaField" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="portadaField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AceptarButton" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                                      <Component id="CheckBoxPrestado" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <Component id="jScrollPane1" min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="AceptarButton" min="-2" pref="44" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
@@ -604,6 +625,24 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="IMAGEN DE PORTADA"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="CheckBoxDeseados">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#xbf;A&#xf1;adir a lista de deseos?"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="CheckBoxPrestado">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#xbf;Prestado?"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[149, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="CheckBoxFavorito">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="A&#xf1;adir a favoritos"/>
                   </Properties>
                 </Component>
               </SubComponents>

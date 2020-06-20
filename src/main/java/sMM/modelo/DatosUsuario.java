@@ -28,7 +28,16 @@ public class DatosUsuario {
     private HashMap<Integer,Amigo> amigos;
     private HashMap<Integer,Soporte> soportes;
     private HashMap<Integer,Formato> formatos;
+    private HashMap<Integer,Cancion> canciones;
     
+    
+    public HashMap<Integer, Cancion> getCanciones() {
+        return canciones;
+    }
+
+    public void setCanciones(HashMap<Integer, Cancion> canciones) {
+        this.canciones = canciones;
+    }
     
     
     public ArrayList<Pair<Integer, Integer>> getGenerosDiscos() {

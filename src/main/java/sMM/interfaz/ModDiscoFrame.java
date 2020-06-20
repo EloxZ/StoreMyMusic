@@ -169,6 +169,18 @@ public class ModDiscoFrame extends javax.swing.JFrame {
         d.setIdDiscografica(disco);
         d.setIdUbicacion(ub);
         
+        if(CheckBoxDeseados.isSelected()){
+           d.setEnListaDeseos(true);
+           d.setPrestado(false);
+        } else if(CheckBoxPrestado.isSelected()){
+           d.setEnListaDeseos(false);
+           d.setPrestado(true);
+        }
+        
+        if(CheckBoxFavorito.isSelected()){
+           d.setFavorito(true);
+        }
+        
         ConexionBD bd = ConexionJDBC.getInstance();
         bd.modificarDisco(d);
         if (id != 0) {
@@ -281,6 +293,9 @@ public class ModDiscoFrame extends javax.swing.JFrame {
         portadaField = new javax.swing.JTextField();
         portadaLabel = new javax.swing.JLabel();
         siguienteButton = new javax.swing.JLabel();
+        CheckBoxDeseados = new javax.swing.JCheckBox();
+        CheckBoxPrestado = new javax.swing.JCheckBox();
+        CheckBoxFavorito = new javax.swing.JCheckBox();
         Adquisicion = new javax.swing.JPanel();
         AceptarAdqButton = new javax.swing.JLabel();
         infoAdqLabel = new javax.swing.JLabel();
@@ -558,6 +573,13 @@ public class ModDiscoFrame extends javax.swing.JFrame {
             }
         });
 
+        CheckBoxDeseados.setText("¿Añadir a lista de deseos?");
+
+        CheckBoxPrestado.setText("¿Prestado?");
+        CheckBoxPrestado.setPreferredSize(new java.awt.Dimension(149, 23));
+
+        CheckBoxFavorito.setText("Añadir a favoritos");
+
         javax.swing.GroupLayout BasicosLayout = new javax.swing.GroupLayout(Basicos);
         Basicos.setLayout(BasicosLayout);
         BasicosLayout.setHorizontalGroup(
@@ -611,12 +633,20 @@ public class ModDiscoFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(discograficaField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(BasicosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(siguienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BasicosLayout.createSequentialGroup()
+                                .addGap(0, 14, Short.MAX_VALUE)
+                                .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(BasicosLayout.createSequentialGroup()
+                                        .addComponent(siguienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(BasicosLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(CheckBoxPrestado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CheckBoxDeseados, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CheckBoxFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(25, 25, 25))))
                     .addGroup(BasicosLayout.createSequentialGroup()
                         .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(BasicosLayout.createSequentialGroup()
@@ -692,23 +722,33 @@ public class ModDiscoFrame extends javax.swing.JFrame {
                     .addComponent(ubicacionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(posField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(discograficaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valoracionLabel)
-                    .addComponent(notaLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CheckBoxPrestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(BasicosLayout.createSequentialGroup()
-                        .addComponent(valoracionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(valoracionLabel)
+                            .addComponent(notaLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(BasicosLayout.createSequentialGroup()
+                                .addComponent(valoracionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(portadaLabel)
+                                .addGap(5, 5, 5)
+                                .addComponent(portadaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(BasicosLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(portadaLabel)
-                        .addGap(5, 5, 5)
-                        .addComponent(portadaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(siguienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                        .addComponent(CheckBoxDeseados, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(CheckBoxFavorito)
+                        .addGap(16, 16, 16)
+                        .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(siguienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16))
         );
 
         Panel.add(Basicos, "basicos");
@@ -838,7 +878,7 @@ public class ModDiscoFrame extends javax.swing.JFrame {
                 .addGroup(AdquisicionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AceptarAdqButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(atrasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         Panel.add(Adquisicion, "adquisicion");
@@ -1247,6 +1287,9 @@ public class ModDiscoFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Base;
     private javax.swing.JPanel Basicos;
     private javax.swing.JLabel Cerrar;
+    private javax.swing.JCheckBox CheckBoxDeseados;
+    private javax.swing.JCheckBox CheckBoxFavorito;
+    private javax.swing.JCheckBox CheckBoxPrestado;
     private javax.swing.JPanel Dragger;
     private javax.swing.JLabel Minimizar;
     private javax.swing.JPanel Panel;

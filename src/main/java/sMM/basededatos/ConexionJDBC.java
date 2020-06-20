@@ -47,6 +47,94 @@ public class ConexionJDBC extends ConexionBD{
     }
 
 
+    /***************************************************************************************/
+    /****CANCIONES***************************************************************************/
+       
+    public HashMap<Integer,Cancion> listaCanciones() {
+	HashMap<Integer,Cancion> lCanciones = new HashMap<Integer,Cancion>();
+	String selectQueryBody = "SELECT * FROM Canciones";
+	Statement querySt;
+	try {
+		querySt = conn.createStatement();
+		ResultSet rs = querySt.executeQuery(selectQueryBody);
+		// position result to first
+		int cont = 0;
+		if (rs.isBeforeFirst()) {
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				int track = rs.getInt(2);
+                                String titulo = rs.getString(3);
+				String autor = rs.getString(4);
+                                int duracion = rs.getInt(5);
+                                String notas = rs.getString(6);
+                                double valoracion = rs.getDouble(7);
+                                int soporte = rs.getInt(8);
+                		lCanciones.put(id, new Cancion(id, track, titulo, autor, duracion, notas, valoracion, soporte));
+                        	System.out.println(id+" "+track+" "+titulo+" "+autor+" "+duracion+" "+notas+" "+valoracion+" "+soporte);
+                                cont++;
+			}
+		}
+		System.out.println(lCanciones);
+		System.out.println("Importadas "+cont+" Canciones");
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return lCanciones;
+    }
+        
+        
+    public int añadirCancion (Cancion c) {
+		int cancionID = 0;
+		String insertBody = "INSERT INTO Canciones (Track,TituloCancion,Autor,Duracion,Notas,Valoracion,idSoporte) VALUES(?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
+			texto.setInt(1, c.getTrack());
+                        texto.setString(2, c.getTitulo());
+			texto.setString(3, c.getAutor());
+                        texto.setInt(4, c.getDuracion());
+			int res = texto.executeUpdate();
+			ResultSet rs = texto.getGeneratedKeys();
+			while (rs.next()) {
+				cancionID = rs.getInt(1);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return cancionID;
+	}	
+	
+    public void modificarCancion(int id, int tr, String titulo, String aut, int dur, String not, double val, int idSop) {
+	String query = "UPDATE Canciones SET Track = ?, TituloCancion = ?, Autor = ?, Duracion = ?, Notas = ?, Valoracion = ?, idSoporte = ? WHERE idCancion = ?";
+	try {
+		PreparedStatement texto = conn.prepareStatement(query);
+		texto.setInt(8, id);
+		texto.setInt(1,tr);
+                texto.setString(2, titulo);
+		texto.setString(3, aut);
+                texto.setInt(4, dur);
+                texto.setString(5, not);
+                texto.setDouble(6, val);
+                texto.setInt(7,idSop);
+		int res = texto.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+    }
+
+        public void eliminarCancion(int id) {
+        String query = "DELETE FROM Canciones WHERE (idCancion = ?)";
+        try {
+            PreparedStatement texto = conn.prepareStatement(query);
+            texto.setInt(1, id);
+            int res = texto.executeUpdate();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public ArrayList<Pair<Integer,Integer>>  getAutoresDiscos() {
         ArrayList<Pair<Integer,Integer>> ad = new ArrayList<>();
         String selectQueryBody = "SELECT * FROM Autores_has_Discos";
@@ -206,13 +294,13 @@ public class ConexionJDBC extends ConexionBD{
     }
     
     public int añadirDisco(Disco dis) {
-		int discoID = 0;
+int discoID = 0;
 		java.sql.Date fecha2 = null;
 		if(dis.getFechaCompra() != null) {
 			fecha2 = java.sql.Date.valueOf(dis.getFechaCompra());
 		}
 		 
-		String insertBody = "INSERT INTO Discos(Titulo,AñoSalida,AñoEdicion,NumeroCatalogo,CodigoBarras,CodigoColeccion,FechaCompra,PrecioCompra,Notas,Valoracion,PaisEdicion,PosicionEnUbicacion, idCategoria, idDiscografica, idUbicacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertBody = "INSERT INTO Discos(Titulo,AñoSalida,AñoEdicion,NumeroCatalogo,CodigoBarras,CodigoColeccion,FechaCompra,PrecioCompra,Notas,Valoracion,PaisEdicion,PosicionEnUbicacion, idCategoria, idDiscografica, idUbicacion, EnListaDeseo, Favorito, Prestado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
 			texto.setString(1, dis.getTitulo());
@@ -252,6 +340,17 @@ public class ConexionJDBC extends ConexionBD{
                             texto.setInt(15, dis.getIdUbicacion());
                         }
                         //texto.setInt(16, 0);
+                        if(dis.getEnListaDeseos()){
+                            dis.setPrestado(false);
+                        } else if(dis.getPrestado()){
+                            dis.setEnListaDeseos(false);
+                        }
+                        
+                        
+                        texto.setBoolean(16, dis.getEnListaDeseos());
+                        texto.setBoolean(17, dis.getFavorito());
+                        texto.setBoolean(18, dis.getPrestado());
+                        
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
@@ -325,7 +424,7 @@ public class ConexionJDBC extends ConexionBD{
                     fecha2 = java.sql.Date.valueOf(dis.getFechaCompra());
             }
 
-            String insertBody = "UPDATE Discos Set Titulo = ?, AñoSalida = ?, AñoEdicion = ?, NumeroCatalogo = ?, CodigoBarras = ?, CodigoColeccion = ?, FechaCompra = ?, PrecioCompra = ?,Notas = ?,Valoracion = ?,PaisEdicion = ?,PosicionEnUbicacion = ?, idCategoria = ?, idDiscografica = ?, idUbicacion = ? WHERE idDisco = ?";
+            String insertBody = "UPDATE Discos Set Titulo = ?, AñoSalida = ?, AñoEdicion = ?, NumeroCatalogo = ?, CodigoBarras = ?, CodigoColeccion = ?, FechaCompra = ?, PrecioCompra = ?,Notas = ?,Valoracion = ?,PaisEdicion = ?,PosicionEnUbicacion = ?, idCategoria = ?, idDiscografica = ?, idUbicacion = ?, EnListaDeseo = ?, Favorito = ?, Prestado = ? WHERE idDisco = ?";
             try {
                     PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
                     texto.setString(1, dis.getTitulo());
@@ -364,8 +463,11 @@ public class ConexionJDBC extends ConexionBD{
                     } else {
                         texto.setInt(15, dis.getIdUbicacion());
                     }
-                    texto.setInt(16, discoID);
-                    //texto.setInt(16, 0);
+                    //texto.setInt(16, discoID);
+                    texto.setBoolean(16, dis.getEnListaDeseos());
+                    texto.setBoolean(17, dis.getFavorito());
+                    texto.setBoolean(18, dis.getPrestado());
+                    texto.setInt(19, discoID);
                     texto.executeUpdate();
             } catch(SQLException e) {
                     e.printStackTrace();
