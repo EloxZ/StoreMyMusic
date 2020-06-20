@@ -47,11 +47,13 @@ import javax.swing.table.TableRowSorter;
 import sMM.basededatos.*;
 import sMM.modelo.*;
 import sun.java2d.SunGraphicsEnvironment;
+
 /**
  *
  * @author Eloy
  */
 public class MainFrame extends javax.swing.JFrame implements WindowListener {
+
     private static DatosUsuario du;
     private ImageIcon addDiscoImg;
     private ImageIcon addDiscoImg2;
@@ -74,24 +76,62 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     private ImageIcon formatos;
     private ImageIcon formatosSel;
     private ImageIcon defaultPortada;
-    private HashMap<Integer,Integer> tuplaFilaDisco;
+    private HashMap<Integer, Integer> tuplaFilaDisco;
     private Cloudinary cloudinary = new Cloudinary("cloudinary://846511673329722:8t_2g__--MhkPhYpG3xEyncFf5Y@storemymusic");
     AddDiscoFrame frame;
+    RowFilter<CustomTableModel, Integer> FiltroListaDeseos = new RowFilter<CustomTableModel, Integer>() {
+            public boolean include(RowFilter.Entry<? extends CustomTableModel, ? extends Integer> entry) {
+                
+                int idEnTabla = entry.getIdentifier();
+                int idDiscoMarcado = tuplaFilaDisco.get(Lista.convertRowIndexToModel(idEnTabla));
+                if (du.getDiscos().get(idDiscoMarcado).getEnListaDeseos()==true) {
+                    // Returning true indicates this row should be shown.
+                    return true;
+                }
+                return false;
+            }
+        };
+    RowFilter<CustomTableModel, Integer> FiltroColeccion = new RowFilter<CustomTableModel, Integer>() {
+            public boolean include(RowFilter.Entry<? extends CustomTableModel, ? extends Integer> entry) {
+                
+                int idEnTabla = entry.getIdentifier();
+                int idDiscoMarcado = tuplaFilaDisco.get(Lista.convertRowIndexToModel(idEnTabla));
+                if (du.getDiscos().get(idDiscoMarcado).getEnListaDeseos()==false) {
+                    // Returning true indicates this row should be shown.
+                    return true;
+                }
+                return false;
+            }
+        };
+    RowFilter<CustomTableModel, Integer> FiltroFavoritos = new RowFilter<CustomTableModel, Integer>() {
+            public boolean include(RowFilter.Entry<? extends CustomTableModel, ? extends Integer> entry) {
+                
+                int idEnTabla = entry.getIdentifier();
+                int idDiscoMarcado = tuplaFilaDisco.get(Lista.convertRowIndexToModel(idEnTabla));
+                if (du.getDiscos().get(idDiscoMarcado).getFavorito()==true) {
+                    // Returning true indicates this row should be shown.
+                    return true;
+                }
+                return false;
+            }
+        };
     
+
     // Variables para mover ventana desde la barra de titulo (Dragger)
     Point start_drag;
     Point start_loc;
-    
+
     // Variables de estado
     boolean menuOpen;
     boolean dragging;
-    
+    boolean listaDeseosBool;
+    boolean coleccionBool;
+    boolean favoritosBool;
+
     public static DatosUsuario getDatosUsuario() {
         return du;
     }
-    
-    
-    
+
     public void consultarDiscos() {
         // Copia de datos en memoria
         ConexionBD bd = ConexionJDBC.getInstance();
@@ -108,36 +148,35 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         du.setDiscograficas(bd.listaDiscograficas());
         du.setTiendas(bd.listaTiendas());
         du.setUbicaciones(bd.listaUbicaciones());
-        
 
         tuplaFilaDisco = new HashMap<>();
-        
+
         Lista.setVisible(false);
         // Poner en lista
-        CustomTableModel listModel = new CustomTableModel(new String [] {
-                "TÍTULO", "AUTORES", "EDICIÓN", "SALIDA", "VALORACIÓN"
-            });
+        CustomTableModel listModel = new CustomTableModel(new String[]{
+            "TÍTULO", "AUTORES", "EDICIÓN", "SALIDA", "VALORACIÓN"
+        });
 
         //int rowCount = listModel.getRowCount();
         //Remove rows one by one from the end of the table
         //for (int i = rowCount - 1; i >= 0; i--) {
-         //   listModel.removeRow(i);
+        //   listModel.removeRow(i);
         //}
         int i = 0;
-        for (Entry<Integer,Disco> ed : du.getDiscos().entrySet()) {
+        for (Entry<Integer, Disco> ed : du.getDiscos().entrySet()) {
             Object[] listaAtributos = new Object[5];
             listaAtributos[0] = ed.getValue().getTitulo();
-            listaAtributos[1] =  du.stringAutoresDisco(ed.getKey());
+            listaAtributos[1] = du.stringAutoresDisco(ed.getKey());
             if (ed.getValue().getAnoEdicion() != 0) {
                 listaAtributos[2] = ed.getValue().getAnoEdicion();
-            } 
+            }
             if (ed.getValue().getAnoSalida() != 0) {
                 listaAtributos[3] = ed.getValue().getAnoSalida();
-            } 
+            }
             if (ed.getValue().getValoracion() != -1) {
                 listaAtributos[4] = ed.getValue().getValoracion();
             }
-            
+
             tuplaFilaDisco.put(i, ed.getValue().getID());
             listModel.addRow(listaAtributos);
             i++;
@@ -150,7 +189,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         Lista.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
         Lista.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
         Lista.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
-        
+
         Lista.getColumnModel().getColumn(4).setMinWidth(130);
         Lista.getColumnModel().getColumn(4).setMaxWidth(130);
         Lista.getColumnModel().getColumn(2).setMinWidth(100);
@@ -159,41 +198,39 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         Lista.getColumnModel().getColumn(3).setMaxWidth(100);
         Lista.setVisible(true);
     }
-    
+
     Point getScreenLocation(MouseEvent e) {
         Point cursor = e.getPoint();
         Point target_location = this.getLocationOnScreen();
         return new Point((int) (target_location.getX() + cursor.getX()),
-            (int) (target_location.getY() + cursor.getY()));
+                (int) (target_location.getY() + cursor.getY()));
     }
-    
+
     private void resetBotones() {
-        DiscosButton.setBackground(new Color(13,115,119));
+        DiscosButton.setBackground(new Color(13, 115, 119));
         DiscosButton.setForeground(Color.white);
-        DatosButton.setBackground(new Color(13,115,119));
+        DatosButton.setBackground(new Color(13, 115, 119));
         DatosButton.setForeground(Color.white);
     }
- 
-    
+
     public void animacionColapsarMenu() {
-        TimerTask task = new ColapsarMenu(Menu,this);
-        Timer timer = new Timer();
-        timer.schedule(task, 0, 7);
-    }
-    
-    public void animacionExpandirMenu() {
-        TimerTask task = new ExpandirMenu(Menu,this);
+        TimerTask task = new ColapsarMenu(Menu, this);
         Timer timer = new Timer();
         timer.schedule(task, 0, 7);
     }
 
-  
+    public void animacionExpandirMenu() {
+        TimerTask task = new ExpandirMenu(Menu, this);
+        Timer timer = new Timer();
+        timer.schedule(task, 0, 7);
+    }
+
     private void cargarRecursos() {
         ClassLoader classLoader = getClass().getClassLoader();
-        addDiscoImg = new ImageIcon( classLoader.getResource("addDiscosIcon.png"));
-        addDiscoImg2 = new ImageIcon( classLoader.getResource("addDiscosIcon2.png"));
-        rmvDiscoImg = new ImageIcon( classLoader.getResource("rmvDiscoImg.png"));
-        rmvDiscoImg2 = new ImageIcon( classLoader.getResource("rmvDiscoImg2.png"));
+        addDiscoImg = new ImageIcon(classLoader.getResource("addDiscosIcon.png"));
+        addDiscoImg2 = new ImageIcon(classLoader.getResource("addDiscosIcon2.png"));
+        rmvDiscoImg = new ImageIcon(classLoader.getResource("rmvDiscoImg.png"));
+        rmvDiscoImg2 = new ImageIcon(classLoader.getResource("rmvDiscoImg2.png"));
         addDiscoButton.setIcon(addDiscoImg);
         defaultPortada = new ImageIcon(classLoader.getResource("noPortada.png"));
         autores = new ImageIcon(classLoader.getResource("autores.png"));
@@ -227,16 +264,16 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         addDiscoImg2.setImage(addDiscoImg2.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH));
         rmvDiscoImg.setImage(rmvDiscoImg.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH));
         rmvDiscoImg2.setImage(rmvDiscoImg2.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH));
-        
+
         portadaDisco.setIcon(defaultPortada);
-        
-          // Configuracion de los fonts
+
+        // Configuracion de los fonts
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            Font f1 = Font.createFont(Font.TRUETYPE_FONT,classLoader.getResourceAsStream("Avenir-Medium.ttf"));
+            Font f1 = Font.createFont(Font.TRUETYPE_FONT, classLoader.getResourceAsStream("Avenir-Medium.ttf"));
             Font f2 = Font.createFont(Font.TRUETYPE_FONT, classLoader.getResourceAsStream("Avenir-Book.ttf"));
-            Font f3 = f1.deriveFont(Font.BOLD,14f);
-            Font f4 = f1.deriveFont(Font.BOLD + Font.ITALIC,14f);
+            Font f3 = f1.deriveFont(Font.BOLD, 14f);
+            Font f4 = f1.deriveFont(Font.BOLD + Font.ITALIC, 14f);
             f1 = f1.deriveFont(19f);
             f2 = f2.deriveFont(14f);
             ge.registerFont(f1);
@@ -252,36 +289,36 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void configComponentes() {
         addDiscoButton.setOpaque(false);
 
         // Config lista de discos
-        UIManager.getDefaults().put("TableHeader.cellBorder",createEmptyBorder());
-        PanelLista.getViewport().setBackground(new Color(30,30,30));
+        UIManager.getDefaults().put("TableHeader.cellBorder", createEmptyBorder());
+        PanelLista.getViewport().setBackground(new Color(30, 30, 30));
         PanelLista.setBorder(createEmptyBorder());
         PanelLista.getHorizontalScrollBar().setUI(new MyScrollbar());
         PanelLista.getVerticalScrollBar().setUI(new MyScrollbar());
         Lista.getTableHeader().setBorder(null);
-        Lista.getTableHeader().setBackground(new Color(205,205,205));
+        Lista.getTableHeader().setBackground(new Color(205, 205, 205));
         Lista.getTableHeader().setForeground(Color.BLACK);
         Lista.getTableHeader().setReorderingAllowed(false);
-        Lista.getTableHeader().setPreferredSize(new Dimension(Lista.getTableHeader().getSize().width,30));
-        
+        Lista.getTableHeader().setPreferredSize(new Dimension(Lista.getTableHeader().getSize().width, 30));
+
         // Comportamiento al seleccionar un disco de la lista
-        Lista.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        Lista.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 if (Lista.getSelectedRow() != -1) {
                     int row = Lista.convertRowIndexToModel(Lista.getSelectedRow());
                     String titulo = (String) Lista.getModel().getValueAt(row, 0);
                     String autores = (String) Lista.getModel().getValueAt(row, 1);
-                    
+
                     String res;
                     int idDisco = tuplaFilaDisco.get(row);
                     Disco d = du.getDiscos().get(idDisco);
                     int edicion = d.getAnoEdicion();
-                    
+
                     if (autores == null || autores.compareTo("") == 0) {
                         res = titulo;
                     } else {
@@ -290,87 +327,105 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
                     if (edicion != 0) {
                         res += " (" + edicion + ")";
                     }
-                    labelTitulo.setText("<html>" + res +"</html>");
-                    
+                    labelTitulo.setText("<html>" + res + "</html>");
+
                     StringJoiner joiner = new StringJoiner(",  ");
-                    
+
                     if (d.getIdCategoria() != 0) {
-                        joiner.add("Categoría: "  + du.getCategorias().get(d.getIdCategoria()).toString());
+                        joiner.add("Categoría: " + du.getCategorias().get(d.getIdCategoria()).toString());
                     }
-                    if (d.getAnoSalida() != 0) joiner.add("Año de salida:  " + d.getAnoSalida());
-                    if (d.getNumeroCatalogo() != null && d.getNumeroCatalogo().compareTo("") != 0) joiner.add("Número de catalogo:  " + d.getNumeroCatalogo());
-                    if (d.getCodigoBarras() != null && d.getCodigoBarras().compareTo("") != 0) joiner.add("Código de barras:  " + d.getCodigoBarras());
-                    if (d.getCodigoColeccion() != null && d.getCodigoColeccion().compareTo("") != 0) joiner.add("Código de colección:  " + d.getCodigoColeccion());
-                    if (d.getFechaCompra() != null)  joiner.add("Fecha de compra:  " + d.getFechaCompra());
-                    if (d.getPrecioCompra() != -1)  joiner.add("Precio de compra:  " + d.getPrecioCompra());
-                    if (d.getValoracion() != -1)  joiner.add("Valoración:  " + d.getValoracion());
-                    if (d.getPaisEdicion() != null && d.getPaisEdicion().compareTo("") != 0)  joiner.add("País de edición:  " + d.getPaisEdicion());
+                    if (d.getAnoSalida() != 0) {
+                        joiner.add("Año de salida:  " + d.getAnoSalida());
+                    }
+                    if (d.getNumeroCatalogo() != null && d.getNumeroCatalogo().compareTo("") != 0) {
+                        joiner.add("Número de catalogo:  " + d.getNumeroCatalogo());
+                    }
+                    if (d.getCodigoBarras() != null && d.getCodigoBarras().compareTo("") != 0) {
+                        joiner.add("Código de barras:  " + d.getCodigoBarras());
+                    }
+                    if (d.getCodigoColeccion() != null && d.getCodigoColeccion().compareTo("") != 0) {
+                        joiner.add("Código de colección:  " + d.getCodigoColeccion());
+                    }
+                    if (d.getFechaCompra() != null) {
+                        joiner.add("Fecha de compra:  " + d.getFechaCompra());
+                    }
+                    if (d.getPrecioCompra() != -1) {
+                        joiner.add("Precio de compra:  " + d.getPrecioCompra());
+                    }
+                    if (d.getValoracion() != -1) {
+                        joiner.add("Valoración:  " + d.getValoracion());
+                    }
+                    if (d.getPaisEdicion() != null && d.getPaisEdicion().compareTo("") != 0) {
+                        joiner.add("País de edición:  " + d.getPaisEdicion());
+                    }
                     if (d.getIdDiscografica() != 0) {
-                        joiner.add("Discografica:  "  + du.getDiscograficas().get(d.getIdDiscografica()).toString());
+                        joiner.add("Discografica:  " + du.getDiscograficas().get(d.getIdDiscografica()).toString());
                     }
                     if (d.getIdUbicacion() != 0) {
-                        joiner.add("Ubicación: "  + du.getUbicaciones().get(d.getIdUbicacion()).toString());
+                        joiner.add("Ubicación: " + du.getUbicaciones().get(d.getIdUbicacion()).toString());
                     }
-                   if (d.getPosicionEnUbicacion() != null && d.getPosicionEnUbicacion().compareTo("") != 0)  joiner.add("Posición del disco:  " +d.getPosicionEnUbicacion());
-                   if (d.getIdTienda() != 0) {
-                        joiner.add("Tienda:  "  + du.getTiendas().get(d.getIdTienda()).toString());
+                    if (d.getPosicionEnUbicacion() != null && d.getPosicionEnUbicacion().compareTo("") != 0) {
+                        joiner.add("Posición del disco:  " + d.getPosicionEnUbicacion());
                     }
-                   String generos = du.stringGenerosDisco(idDisco);
-                   if (generos.compareTo("") != 0) {
-                       joiner.add("Géneros: " + generos);
-                   }
-                   
-                   
-                   if (d.getPortada() == null || d.getPortada().compareTo("") == 0) {
-                       portadaDisco.setIcon(defaultPortada);
-                   } else {
-                       try {
-                           
+                    if (d.getIdTienda() != 0) {
+                        joiner.add("Tienda:  " + du.getTiendas().get(d.getIdTienda()).toString());
+                    }
+                    String generos = du.stringGenerosDisco(idDisco);
+                    if (generos.compareTo("") != 0) {
+                        joiner.add("Géneros: " + generos);
+                    }
+
+                    if (d.getPortada() == null || d.getPortada().compareTo("") == 0) {
+                        portadaDisco.setIcon(defaultPortada);
+                    } else {
+                        try {
+
                             String path = cloudinary.url().resourceType("image").generate(d.getPortada());
                             URL url = new URL(path);
                             Image image = ImageIO.read(url);
                             portadaDisco.setIcon(new ImageIcon(image.getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
-                            
-                       } catch (Exception e) {
-                           portadaDisco.setIcon(defaultPortada);
-                       }
-                   }
-                   
-                   if (d.getNotas().compareTo("") != 0) {
-                       labelNota.setText("<html> NOTA<br>" + d.getNotas() + "</html>" );
-                   } else {
-                       labelNota.setText("");
-                   }
-                   
-                   
-                    
-                   
+
+                        } catch (Exception e) {
+                            portadaDisco.setIcon(defaultPortada);
+                        }
+                    }
+
+                    if (d.getNotas().compareTo("") != 0) {
+                        labelNota.setText("<html> NOTA<br>" + d.getNotas() + "</html>");
+                    } else {
+                        labelNota.setText("");
+                    }
+
                     if (joiner.toString().compareTo("") == 0) {
                         joiner.add("Vaya, que vacío. Prueba a añadir datos.");
                     }
-                            
-                     labelDatos.setText("<html>" + joiner.toString() + "</html>");
-                    
-                    
+
+                    labelDatos.setText("<html>" + joiner.toString() + "</html>");
+
                 }
             }
         });
-         // Resaltar ventana activa por defecto
-        DiscosButton.setBackground(new Color(20,255,236));
-        DiscosButton.setForeground(new Color(50,50,50));
-        
-        
+        // Resaltar ventana activa por defecto
+        DiscosButton.setBackground(new Color(20, 255, 236));
+        DiscosButton.setForeground(new Color(50, 50, 50));
+
         busquedaField.getDocument().addDocumentListener(new DocumentListener() {
 
             public void changedUpdate(DocumentEvent arg0) {
 
             }
+
             public void insertUpdate(DocumentEvent arg0) {
                 String text = busquedaField.getText();
                 TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
                 if (text.trim().length() == 0) {
+                    DescripcionLabel.setText("Mostrando todos los discos");
                     rs.setRowFilter(null);
                 } else {
+                    DescripcionLabel.setText("Filtrando por Busqueda");
+                    listaDeseosBool = false;
+                    coleccionBool = false;
+                    favoritosBool = false;
                     rs.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                 }
             }
@@ -378,42 +433,47 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             public void removeUpdate(DocumentEvent arg0) {
                 String text = busquedaField.getText();
                 TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
+                
                 if (text.trim().length() == 0) {
+                    DescripcionLabel.setText("Mostrando todos los discos");
                     rs.setRowFilter(null);
                 } else {
+                    DescripcionLabel.setText("Filtrando por Busqueda");
+                    listaDeseosBool = false;
+                    coleccionBool = false;
+                    favoritosBool = false;
                     rs.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                 }
             }
         });
     }
-    
+
     public void configVentana() {
         // Configuracion dimension maxima
         GraphicsConfiguration config = this.getGraphicsConfiguration();
         Rectangle usableBounds = SunGraphicsEnvironment.getUsableBounds(config.getDevice());
         setMaximizedBounds(usableBounds);
-        
+
         // Poner ventana en medio
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
         // Listener para controlar mejor la ventana
         addWindowListener(this);
     }
-    
+
     public MainFrame() {
         // Inicializacion variables de estado
         EstadoMenu.moviendose = false;
         menuOpen = true;
         dragging = false;
-        
+
         initComponents();
         configComponentes();
         configVentana();
         cargarRecursos();
         consultarDiscos();
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -447,6 +507,10 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         busquedaField = new javax.swing.JTextField();
         busquedaLabel = new javax.swing.JLabel();
         editarButton = new javax.swing.JLabel();
+        ListaDeseosButton = new javax.swing.JLabel();
+        DescripcionLabel = new javax.swing.JLabel();
+        ColeccionButton = new javax.swing.JLabel();
+        FavoritosButton = new javax.swing.JLabel();
         Datos = new javax.swing.JPanel();
         autoresButton = new javax.swing.JLabel();
         ubicacionesButton = new javax.swing.JLabel();
@@ -751,7 +815,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
                         .addComponent(labelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(labelNota, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE))
+                    .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
                 .addComponent(portadaDisco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -794,27 +858,70 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             }
         });
 
+        ListaDeseosButton.setBackground(new java.awt.Color(230, 230, 230));
+        ListaDeseosButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ListaDeseosButton.setText("Lista de Deseos");
+        ListaDeseosButton.setOpaque(true);
+        ListaDeseosButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListaDeseosButtonMouseClicked(evt);
+            }
+        });
+
+        DescripcionLabel.setForeground(new java.awt.Color(254, 254, 254));
+        DescripcionLabel.setText("Mostrando todos los discos");
+
+        ColeccionButton.setBackground(new java.awt.Color(230, 230, 230));
+        ColeccionButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ColeccionButton.setText("Colección");
+        ColeccionButton.setOpaque(true);
+        ColeccionButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ColeccionButtonMouseClicked(evt);
+            }
+        });
+
+        FavoritosButton.setBackground(new java.awt.Color(230, 230, 230));
+        FavoritosButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FavoritosButton.setText("Favoritos");
+        FavoritosButton.setOpaque(true);
+        FavoritosButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FavoritosButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout DiscosLayout = new javax.swing.GroupLayout(Discos);
         Discos.setLayout(DiscosLayout);
         DiscosLayout.setHorizontalGroup(
             DiscosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DiscosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(DiscosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(busquedaField, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(busquedaLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removeDiscoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addDiscoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-            .addComponent(PanelDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
+            .addComponent(PanelDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE)
             .addGroup(DiscosLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(PanelLista)
-                .addGap(50, 50, 50))
+                .addGroup(DiscosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DiscosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ListaDeseosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ColeccionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FavoritosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(DescripcionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addGroup(DiscosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(busquedaField, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(busquedaLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeDiscoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addDiscoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(editarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(DiscosLayout.createSequentialGroup()
+                        .addComponent(PanelLista)
+                        .addGap(50, 50, 50))))
         );
         DiscosLayout.setVerticalGroup(
             DiscosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -823,16 +930,23 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
                 .addComponent(PanelLista, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(DiscosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addDiscoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(removeDiscoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(ListaDeseosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FavoritosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addDiscoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(removeDiscoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DiscosLayout.createSequentialGroup()
                         .addComponent(busquedaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(busquedaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(editarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(DiscosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(busquedaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DescripcionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(editarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ColeccionButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PanelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        ListaDeseosButton.getAccessibleContext().setAccessibleName("MostrarListaDeseos");
 
         Info.add(Discos, "discosCard");
 
@@ -1017,7 +1131,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         if (evt.getButton() == 1) {
             if (!EstadoMenu.moviendose) { // Desactiva boton si se esta moviendo
                 EstadoMenu.moviendose = true;
-                
+
                 if (menuOpen) {
                     for (Component x : Menu.getComponents()) {
                         x.setVisible(false);
@@ -1032,7 +1146,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
                     animacionExpandirMenu();
                 }
             }
-            
+
             //Menu.setVisible(false);
             //Info.setVisible(false);
             //Menu.setPreferredSize(dMenu);
@@ -1047,9 +1161,9 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         if (this.getExtendedState() == JFrame.NORMAL && dragging) {
             Point current = this.getScreenLocation(evt);
             Point offset = new Point((int) current.getX() - (int) start_drag.getX(),
-                (int) current.getY() - (int) start_drag.getY());
+                    (int) current.getY() - (int) start_drag.getY());
             Point new_location = new Point(
-                (int) (this.start_loc.getX() + offset.getX()), (int) (this.start_loc
+                    (int) (this.start_loc.getX() + offset.getX()), (int) (this.start_loc
                     .getY() + offset.getY()));
             this.setLocation(new_location);
         }
@@ -1083,7 +1197,8 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     }//GEN-LAST:event_CerrarMouseReleased
 
     private void CerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarMouseClicked
-        if (evt.getButton() == 1) System.exit(0);
+        if (evt.getButton() == 1)
+            System.exit(0);
     }//GEN-LAST:event_CerrarMouseClicked
 
     private void MaximizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaximizarMouseEntered
@@ -1114,7 +1229,8 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     }//GEN-LAST:event_MaximizarMouseClicked
 
     private void MinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MinimizarMouseClicked
-        if (evt.getButton() == 1) this.setExtendedState(JFrame.ICONIFIED);
+        if (evt.getButton() == 1)
+            this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_MinimizarMouseClicked
 
     private void MinimizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MinimizarMousePressed
@@ -1138,8 +1254,8 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     private void DiscosButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DiscosButtonMouseClicked
         if (evt.getButton() == 1) {
             resetBotones();
-            DiscosButton.setBackground(new Color(20,255,236));
-            DiscosButton.setForeground(new Color(50,50,50));
+            DiscosButton.setBackground(new Color(20, 255, 236));
+            DiscosButton.setForeground(new Color(50, 50, 50));
             CardLayout cl = (CardLayout) Info.getLayout();
             cl.show(Info, "discosCard");
         }
@@ -1148,8 +1264,8 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     private void DatosButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatosButtonMouseClicked
         if (evt.getButton() == 1) {
             resetBotones();
-            DatosButton.setBackground(new Color(20,255,236));
-            DatosButton.setForeground(new Color(50,50,50));
+            DatosButton.setBackground(new Color(20, 255, 236));
+            DatosButton.setForeground(new Color(50, 50, 50));
             CardLayout cl = (CardLayout) Info.getLayout();
             cl.show(Info, "datosCard");
         }
@@ -1184,18 +1300,18 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     }//GEN-LAST:event_addDiscoButtonMouseExited
 
     private void removeDiscoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeDiscoButtonMouseClicked
-       if (evt.getButton() == 1) {
+        if (evt.getButton() == 1) {
 
-           if (Lista.getSelectedRow() != -1) {
-                          ConexionBD bd = ConexionJDBC.getInstance();
-            labelTitulo.setText("Disco borrado.");
-            labelDatos.setText("");
-            labelNota.setText("");
-           bd.eliminarDisco(tuplaFilaDisco.get(Lista.convertRowIndexToModel(Lista.getSelectedRow())));
-           consultarDiscos();
-           }
+            if (Lista.getSelectedRow() != -1) {
+                ConexionBD bd = ConexionJDBC.getInstance();
+                labelTitulo.setText("Disco borrado.");
+                labelDatos.setText("");
+                labelNota.setText("");
+                bd.eliminarDisco(tuplaFilaDisco.get(Lista.convertRowIndexToModel(Lista.getSelectedRow())));
+                consultarDiscos();
+            }
 
-       }
+        }
     }//GEN-LAST:event_removeDiscoButtonMouseClicked
 
     private void removeDiscoButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeDiscoButtonMouseEntered
@@ -1330,26 +1446,97 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
 
     private void editarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarButtonMouseClicked
         if (evt.getButton() == 1 && Lista.getSelectedRow() != -1) {
-            new ModDiscoFrame(this,tuplaFilaDisco.get(Lista.convertRowIndexToModel(Lista.getSelectedRow()))).setVisible(true);
+            new ModDiscoFrame(this, tuplaFilaDisco.get(Lista.convertRowIndexToModel(Lista.getSelectedRow()))).setVisible(true);
         }
     }//GEN-LAST:event_editarButtonMouseClicked
 
+    private void ListaDeseosButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListaDeseosButtonMouseClicked
+        
+        TableRowSorter d = (TableRowSorter) Lista.getRowSorter();
+        d.setRowFilter(null);
+        if (listaDeseosBool == false)
+        {
+        DescripcionLabel.setText("Mostrando la lista de Deseos");
+        TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
+        rs.setRowFilter(FiltroListaDeseos);
+        listaDeseosBool = true;
+        coleccionBool = false;
+        favoritosBool = false;
+        } else
+        {
+            DescripcionLabel.setText("Mostrando todos los discos");
+            TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
+            rs.setRowFilter(null);
+            listaDeseosBool = false;
+        }
+        
+        
+        
+
+
+    }//GEN-LAST:event_ListaDeseosButtonMouseClicked
+
+    private void ColeccionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ColeccionButtonMouseClicked
+        // TODO add your handling code here:
+        TableRowSorter d = (TableRowSorter) Lista.getRowSorter();
+        d.setRowFilter(null);
+        
+        if (coleccionBool == false)
+        {
+        DescripcionLabel.setText("Mostrando la Colección");
+        TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
+        rs.setRowFilter(FiltroColeccion);
+        coleccionBool = true;
+        listaDeseosBool = false;
+        favoritosBool = false;
+        } else
+        {
+            DescripcionLabel.setText("Mostrando todos los discos");
+            TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
+            rs.setRowFilter(null);
+            coleccionBool = false;
+        }
+    }//GEN-LAST:event_ColeccionButtonMouseClicked
+
+    private void FavoritosButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FavoritosButtonMouseClicked
+        // TODO add your handling code here:
+        TableRowSorter d = (TableRowSorter) Lista.getRowSorter();
+        d.setRowFilter(null);
+        
+        if (favoritosBool == false)
+        {
+        DescripcionLabel.setText("Mostrando favoritos");
+        TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
+        rs.setRowFilter(FiltroFavoritos);
+        coleccionBool = false;
+        listaDeseosBool = false;
+        favoritosBool = true;
+        } else
+        {
+            DescripcionLabel.setText("Mostrando todos los discos");
+            TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
+            rs.setRowFilter(null);
+            favoritosBool = false;
+        }
+    }//GEN-LAST:event_FavoritosButtonMouseClicked
+
     public void mensajeDiscoCreado() {
-            labelTitulo.setText("Disco creado.");
-            labelDatos.setText("");
-            labelNota.setText("");
+        labelTitulo.setText("Disco creado.");
+        labelDatos.setText("");
+        labelNota.setText("");
     }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
 
-        /* Create and display the form */
+ /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               MainFrame f =  new MainFrame();
-               f.setVisible(true);
+                MainFrame f = new MainFrame();
+                f.setVisible(true);
             }
         });
     }
@@ -1358,13 +1545,17 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     private javax.swing.JLabel Activador;
     private javax.swing.JPanel Base;
     private javax.swing.JLabel Cerrar;
+    private javax.swing.JLabel ColeccionButton;
     private javax.swing.JPanel Datos;
     private javax.swing.JLabel DatosButton;
+    private javax.swing.JLabel DescripcionLabel;
     private javax.swing.JPanel Discos;
     private javax.swing.JLabel DiscosButton;
     private javax.swing.JPanel Dragger;
+    private javax.swing.JLabel FavoritosButton;
     private javax.swing.JPanel Info;
     private javax.swing.JTable Lista;
+    private javax.swing.JLabel ListaDeseosButton;
     private javax.swing.JLabel Maximizar;
     private javax.swing.JPanel Menu;
     private javax.swing.JLabel Minimizar;
@@ -1412,7 +1603,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     @Override
     public void windowDeactivated(WindowEvent e) {
     }
-    
+
     @Override
     public void windowDeiconified(WindowEvent event) {
         if (Maximizar.getText().compareTo("-") == 0) {

@@ -137,6 +137,8 @@ public class ConexionJDBC extends ConexionBD{
                     int idUbi = rs.getInt(16);
                     int idTien = rs.getInt(17);
                     String portada = rs.getString(18);
+                    boolean listadeseos = rs.getBoolean(19);
+                    boolean fav = rs.getBoolean(20);
 
                     d.setTitulo(titulo);
                     d.setAnoSalida(yearSalida);
@@ -155,6 +157,8 @@ public class ConexionJDBC extends ConexionBD{
                     d.setIdUbicacion(idUbi);
                     d.setIdTienda(idTien);
                     d.setPortada(portada);
+                    d.setEnListaDeseos(listadeseos);
+                    d.setFavorito(fav);
 
                     
                     discos.put(id,d);
