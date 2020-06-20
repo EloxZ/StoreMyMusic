@@ -218,7 +218,7 @@ public class ConexionJDBC extends ConexionBD{
 			fecha2 = java.sql.Date.valueOf(dis.getFechaCompra());
 		}
 		 
-		String insertBody = "INSERT INTO Discos(Titulo,AñoSalida,AñoEdicion,NumeroCatalogo,CodigoBarras,CodigoColeccion,FechaCompra,PrecioCompra,Notas,Valoracion,PaisEdicion,PosicionEnUbicacion, idCategoria, idDiscografica, idUbicacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertBody = "INSERT INTO Discos(Titulo,AñoSalida,AñoEdicion,NumeroCatalogo,CodigoBarras,CodigoColeccion,FechaCompra,PrecioCompra,Notas,Valoracion,PaisEdicion,PosicionEnUbicacion, idCategoria, idDiscografica, idUbicacion, EnListaDeseo, Favorito, Prestado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
 			texto.setString(1, dis.getTitulo());
@@ -258,6 +258,15 @@ public class ConexionJDBC extends ConexionBD{
                             texto.setInt(15, dis.getIdUbicacion());
                         }
                         //texto.setInt(16, 0);
+                        if(dis.getEnListaDeseos()){
+                            dis.setPrestado(false);
+                        } else if(dis.getPrestado()){
+                            dis.setEnListaDeseos(false);
+                        }
+                        texto.setBoolean(16, dis.getEnListaDeseos());
+                        texto.setBoolean(17, dis.getFavorito());
+                        texto.setBoolean(18, dis.getPrestado());
+                        
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
