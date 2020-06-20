@@ -414,7 +414,6 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             public void changedUpdate(DocumentEvent arg0) {
 
             }
-
             public void insertUpdate(DocumentEvent arg0) {
                 String text = busquedaField.getText();
                 TableRowSorter rs = (TableRowSorter) Lista.getRowSorter();
