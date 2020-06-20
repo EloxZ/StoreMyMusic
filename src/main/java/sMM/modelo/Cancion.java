@@ -9,8 +9,6 @@ public class Cancion {
 	int duracion;
 	String notas;
 	double valoracion;
-<<<<<<< HEAD
-=======
         int idSoporte;
         
 public Cancion(int id, int tr, String titulo, String aut, int dur, String not, double val, int idSop){
@@ -107,6 +105,5 @@ public int getIDSoporte(){
 public void setIDSoporte(int idsop){
     this.idSoporte=idsop;
 }
->>>>>>> Eloy-Branch
 	
 }

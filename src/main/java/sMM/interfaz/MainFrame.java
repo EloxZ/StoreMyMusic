@@ -36,11 +36,8 @@ import javax.imageio.ImageIO;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-<<<<<<< HEAD
-=======
 import javax.swing.JList;
 import javax.swing.JTable;
->>>>>>> Eloy-Branch
 import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
@@ -80,11 +77,8 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
     private ImageIcon formatosSel;
     private ImageIcon defaultPortada;
     private HashMap<Integer,Integer> tuplaFilaDisco;
-<<<<<<< HEAD
-=======
     private HashMap<Integer,Integer> tuplaFilaCancion;
     private HashMap<Integer,Integer> tuplaFilaSoporte;
->>>>>>> Eloy-Branch
     private Cloudinary cloudinary = new Cloudinary("cloudinary://846511673329722:8t_2g__--MhkPhYpG3xEyncFf5Y@storemymusic");
     AddDiscoFrame frame;
     
@@ -109,10 +103,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         du.setDiscos(bd.getDiscos());
         du.setFormatos(bd.listaFormatos());
         du.setSoportes(bd.listaSoportes());
-<<<<<<< HEAD
-=======
         du.setCanciones(bd.listaCanciones());
->>>>>>> Eloy-Branch
         du.setGeneros(bd.listaGeneros());
         du.setAutores(bd.listaAutores());
         du.setAmigos(bd.listaAmigos());
@@ -186,11 +177,8 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         DiscosButton.setForeground(Color.white);
         DatosButton.setBackground(new Color(13,115,119));
         DatosButton.setForeground(Color.white);
-<<<<<<< HEAD
-=======
         verDiscoButton.setBackground(new Color(13,115,119));
         verDiscoButton.setForeground(Color.white);
->>>>>>> Eloy-Branch
     }
  
     
@@ -264,9 +252,6 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             ge.registerFont(f4);
             labelTitulo.setFont(f4);
             DiscosButton.setFont(f1);
-<<<<<<< HEAD
-            DatosButton.setFont(f1);
-=======
             verDiscoButton.setFont(f1);
             DatosButton.setFont(f1);
             
@@ -275,8 +260,6 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             
             CancionesList.setFont(f2);
             CancionesList.getTableHeader().setFont(f3);
-            
->>>>>>> Eloy-Branch
             Lista.setFont(f2);
             Lista.getTableHeader().setFont(f3);
         } catch (Exception e) {
@@ -293,18 +276,11 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         PanelLista.setBorder(createEmptyBorder());
         PanelLista.getHorizontalScrollBar().setUI(new MyScrollbar());
         PanelLista.getVerticalScrollBar().setUI(new MyScrollbar());
-<<<<<<< HEAD
         Lista.getTableHeader().setBorder(null);
-=======
-        Lista.getTableHeader().setBorder(null);  
->>>>>>> Eloy-Branch
         Lista.getTableHeader().setBackground(new Color(205,205,205));
         Lista.getTableHeader().setForeground(Color.BLACK);
         Lista.getTableHeader().setReorderingAllowed(false);
         Lista.getTableHeader().setPreferredSize(new Dimension(Lista.getTableHeader().getSize().width,30));
-        
-<<<<<<< HEAD
-=======
         PanelCancionesList.getViewport().setBackground(new Color(30,30,30));
         PanelCancionesList.setBorder(createEmptyBorder());
         PanelCancionesList.getHorizontalScrollBar().setUI(new MyScrollbar());
@@ -314,7 +290,6 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         CancionesList.getTableHeader().setForeground(Color.BLACK);
         CancionesList.getTableHeader().setReorderingAllowed(false);
         CancionesList.getTableHeader().setPreferredSize(new Dimension(CancionesList.getTableHeader().getSize().width,30));
-        
         PanelSoportesList.getViewport().setBackground(new Color(30,30,30));
         PanelSoportesList.setBorder(createEmptyBorder());
         PanelSoportesList.getHorizontalScrollBar().setUI(new MyScrollbar());
@@ -325,16 +300,11 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
         SoportesList.getTableHeader().setReorderingAllowed(false);
         SoportesList.getTableHeader().setPreferredSize(new Dimension(SoportesList.getTableHeader().getSize().width,30));
         
->>>>>>> Eloy-Branch
         // Comportamiento al seleccionar un disco de la lista
         Lista.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent event) {
-<<<<<<< HEAD
-                if (Lista.getSelectedRow() != -1) {
-=======
                 if (!event.getValueIsAdjusting() && Lista.getSelectedRow() != -1) {
->>>>>>> Eloy-Branch
                     int row = Lista.convertRowIndexToModel(Lista.getSelectedRow());
                     String titulo = (String) Lista.getModel().getValueAt(row, 0);
                     String autores = (String) Lista.getModel().getValueAt(row, 1);
@@ -447,8 +417,6 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
                 }
             }
         });
-<<<<<<< HEAD
-=======
         
        configListCanciones();
         
@@ -510,7 +478,6 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
                 }
             }
         }); 
->>>>>>> Eloy-Branch
     }
     
     public void configVentana() {
