@@ -100,8 +100,28 @@ public class PruebaMetodosBasededatos {
     public void testListaSoportes() {
         assertEquals(1, conexion.listaSoportes().get(7).getIDFormato());
     }
-   
-    
+    @Test
+    public void testListaFormatos() 
+    {
+        assertEquals("CD", conexion.listaFormatos().get(1).getNombre()); 
+    }
+    @Test
+    public void testListaGeneros()
+    {
+        assertEquals("J-Pop", conexion.listaGeneros().get(3).getNombre()); 
+    }
+    @Test
+    public void testListaUbicacion()
+    {
+        assertEquals("Billy Despacho", conexion.listaUbicaciones().get(2).getNombre());
+    }
+    @Test
+    public void testListAmigos()
+    {
+        assertEquals("Fernandez", conexion.listaAmigos().get(7).getNombre()); 
+    }
+            
+           
   
     
 }

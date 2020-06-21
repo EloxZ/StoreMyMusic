@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="undecorated" type="boolean" value="true"/>
@@ -27,12 +44,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="Base" alignment="0" pref="1118" max="32767" attributes="0"/>
+          <Component id="Base" alignment="0" pref="1155" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="Base" alignment="0" max="32767" attributes="0"/>
+          <Component id="Base" alignment="0" pref="743" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -62,15 +79,15 @@
                   <Component id="Menu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Info" max="32767" attributes="0"/>
-                      <Component id="Dragger" pref="943" max="32767" attributes="0"/>
+                      <Component id="Info" pref="980" max="32767" attributes="0"/>
+                      <Component id="Dragger" pref="980" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="Menu" max="32767" attributes="0"/>
+              <Component id="Menu" pref="743" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Component id="Dragger" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -103,12 +120,7 @@
                   </Group>
                   <Component id="DiscosButton" alignment="1" max="32767" attributes="0"/>
                   <Component id="DatosButton" alignment="1" pref="175" max="32767" attributes="0"/>
-<<<<<<< HEAD
-=======
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Component id="verDiscoButton" alignment="1" pref="175" max="32767" attributes="0"/>
-                  </Group>
->>>>>>> Eloy-Branch
+                  <Component id="verDiscoButton" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -120,18 +132,10 @@
                       <Component id="DiscosButton" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="DatosButton" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="verDiscoButton" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
-<<<<<<< HEAD
-=======
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="verDiscoButton" min="-2" pref="40" max="-2" attributes="0"/>
-                          <EmptySpace pref="340" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
->>>>>>> Eloy-Branch
               </Group>
             </DimensionLayout>
           </Layout>
@@ -192,8 +196,6 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DatosButtonMouseClicked"/>
               </Events>
             </Component>
-<<<<<<< HEAD
-=======
             <Component class="javax.swing.JLabel" name="verDiscoButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -213,7 +215,6 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="verDiscoButtonMouseClicked"/>
               </Events>
             </Component>
->>>>>>> Eloy-Branch
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Dragger">
@@ -376,24 +377,32 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="busquedaField" min="-2" pref="169" max="-2" attributes="0"/>
-                              <Component id="busquedaLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="removeDiscoButton" min="-2" pref="45" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="addDiscoButton" min="-2" pref="45" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="editarButton" min="-2" pref="77" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="PanelDatos" alignment="1" pref="943" max="32767" attributes="0"/>
+                      <Component id="PanelDatos" alignment="1" pref="980" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="PanelLista" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="ListaDeseosButton" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="ColeccionButton" min="-2" pref="91" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="FavoritosButton" min="-2" pref="79" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="DescripcionLabel" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="busquedaField" min="-2" pref="169" max="-2" attributes="0"/>
+                                      <Component id="busquedaLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="removeDiscoButton" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="addDiscoButton" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="editarButton" min="-2" pref="77" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="PanelLista" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -403,18 +412,26 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Component id="PanelLista" min="-2" pref="332" max="-2" attributes="0"/>
-                          <EmptySpace pref="50" max="32767" attributes="0"/>
+                          <EmptySpace pref="38" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="addDiscoButton" alignment="1" pref="45" max="32767" attributes="0"/>
-                              <Component id="removeDiscoButton" alignment="1" pref="45" max="32767" attributes="0"/>
+                              <Component id="addDiscoButton" alignment="1" max="32767" attributes="0"/>
+                              <Component id="removeDiscoButton" alignment="1" max="32767" attributes="0"/>
+                              <Component id="editarButton" alignment="1" pref="51" max="32767" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="ColeccionButton" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="ListaDeseosButton" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="FavoritosButton" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="busquedaLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="busquedaField" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="busquedaField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="DescripcionLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Component id="editarButton" alignment="1" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="PanelDatos" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -529,7 +546,7 @@
                                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                       <Component id="labelNota" min="-2" pref="189" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="labelTitulo" pref="675" max="32767" attributes="0"/>
+                                  <Component id="labelTitulo" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="portadaDisco" min="-2" pref="200" max="-2" attributes="0"/>
@@ -621,12 +638,77 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="editarButton">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e6" green="e6" red="e6" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Editar"/>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editarButtonMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ListaDeseosButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e6" green="e6" red="e6" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Lista de Deseos"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="MostrarListaDeseos"/>
+                  </AccessibilityProperties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ListaDeseosButtonMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="DescripcionLabel">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Mostrando todos los discos."/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="ColeccionButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e6" green="e6" red="e6" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Colecci&#xf3;n"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ColeccionButtonMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="FavoritosButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e6" green="e6" red="e6" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Favoritos"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FavoritosButtonMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -757,8 +839,6 @@
                 </Component>
               </SubComponents>
             </Container>
-<<<<<<< HEAD
-=======
             <Container class="javax.swing.JPanel" name="datosDisco">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -777,37 +857,65 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="PanelCancionesList" alignment="0" pref="780" max="32767" attributes="0"/>
-                              <Component id="datosDiscoActivo" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="PanelCancionesList" min="-2" pref="854" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="infoSoporteLabel" min="-2" pref="465" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="addCancionButton" min="-2" pref="108" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="modCancionButton" min="-2" pref="113" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="rmvCancionButton" min="-2" pref="113" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                                  <Component id="datosDiscoActivo" min="-2" pref="780" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="PanelSoportesList" min="-2" pref="854" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="infoDiscoLabel" min="-2" pref="665" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="addSoporteButton" min="-2" pref="142" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace pref="111" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                              <Component id="PanelSoportesList" min="-2" pref="780" max="-2" attributes="0"/>
-                              <EmptySpace pref="111" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace pref="81" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="datosDiscoActivo" min="-2" pref="28" max="-2" attributes="0"/>
-                          <EmptySpace pref="246" max="32767" attributes="0"/>
-                          <Component id="PanelCancionesList" min="-2" pref="387" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Component id="PanelSoportesList" min="-2" pref="205" max="-2" attributes="0"/>
-                              <EmptySpace pref="427" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="PanelSoportesList" min="-2" pref="213" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="infoDiscoLabel" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="addSoporteButton" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="PanelCancionesList" min="-2" pref="303" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="infoSoporteLabel" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="addCancionButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="modCancionButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="rmvCancionButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="29" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -940,9 +1048,86 @@
                     </Property>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JLabel" name="addSoporteButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="A&#xf1;adir/eliminar soporte"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSoporteButtonMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="addCancionButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="A&#xf1;adir canci&#xf3;n"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addCancionButtonMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="infoDiscoLabel">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="infoSoporteLabel">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="modCancionButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Modificar canci&#xf3;n"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="modCancionButtonMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="rmvCancionButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Eliminar canci&#xf3;n"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rmvCancionButtonMouseClicked"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
->>>>>>> Eloy-Branch
           </SubComponents>
         </Container>
       </SubComponents>

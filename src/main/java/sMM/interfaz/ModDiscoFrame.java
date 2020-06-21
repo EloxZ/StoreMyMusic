@@ -64,6 +64,9 @@ public class ModDiscoFrame extends javax.swing.JFrame {
         notaArea.setText(dis.getNotas());
         paisField.setText(dis.getPaisEdicion());
         fechaField.setText(dis.getFechaCompra());
+        CheckBoxDeseados.setSelected(dis.getEnListaDeseos());
+        CheckBoxFavorito.setSelected(dis.getFavorito());
+        CheckBoxPrestado.setSelected(dis.getPrestado());
         
         if (dis.getIdTienda() != 0) {
             seleccionarTienda(dis.getIdTienda());
@@ -196,7 +199,7 @@ public class ModDiscoFrame extends javax.swing.JFrame {
                 }
 
             } catch (Exception e) {
-
+                
             }
         }
         
@@ -573,12 +576,18 @@ public class ModDiscoFrame extends javax.swing.JFrame {
             }
         });
 
-        CheckBoxDeseados.setText("¿Añadir a lista de deseos?");
+        CheckBoxDeseados.setForeground(new java.awt.Color(254, 254, 254));
+        CheckBoxDeseados.setText("Añadir a lista de deseos");
+        CheckBoxDeseados.setOpaque(false);
 
+        CheckBoxPrestado.setForeground(new java.awt.Color(254, 254, 254));
         CheckBoxPrestado.setText("¿Prestado?");
+        CheckBoxPrestado.setOpaque(false);
         CheckBoxPrestado.setPreferredSize(new java.awt.Dimension(149, 23));
 
+        CheckBoxFavorito.setForeground(new java.awt.Color(254, 254, 254));
         CheckBoxFavorito.setText("Añadir a favoritos");
+        CheckBoxFavorito.setOpaque(false);
 
         javax.swing.GroupLayout BasicosLayout = new javax.swing.GroupLayout(Basicos);
         Basicos.setLayout(BasicosLayout);
@@ -634,19 +643,21 @@ public class ModDiscoFrame extends javax.swing.JFrame {
                         .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(discograficaField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BasicosLayout.createSequentialGroup()
-                                .addGap(0, 14, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(BasicosLayout.createSequentialGroup()
-                                        .addComponent(siguienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(BasicosLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CheckBoxPrestado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CheckBoxDeseados, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CheckBoxFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(25, 25, 25))))
+                                    .addComponent(CheckBoxDeseados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BasicosLayout.createSequentialGroup()
+                                        .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(CheckBoxFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(BasicosLayout.createSequentialGroup()
+                                                    .addComponent(siguienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(AceptarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(BasicosLayout.createSequentialGroup()
+                                                    .addGap(10, 10, 10)
+                                                    .addComponent(CheckBoxPrestado, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(36, 36, 36))))))
                     .addGroup(BasicosLayout.createSequentialGroup()
                         .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(BasicosLayout.createSequentialGroup()

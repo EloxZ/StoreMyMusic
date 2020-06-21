@@ -8,10 +8,12 @@ public class Cancion {
 	String autor;
 	int duracion;
 	String notas;
-	double valoracion;
+//David Inicio 21/10
+        float valoracion;
+//David Fin 21/10
         int idSoporte;
         
-public Cancion(int id, int tr, String titulo, String aut, int dur, String not, double val, int idSop){
+public Cancion(int id, int tr, String titulo, String aut, int dur, String not, float val, int idSop){
 		idCancion = id;
                 track = tr;
 		tituloCancion = titulo;
@@ -22,7 +24,7 @@ public Cancion(int id, int tr, String titulo, String aut, int dur, String not, d
                 idSoporte = idSop;
 }
 
-public Cancion(int tr, String titulo, String aut, int dur, String not, double val, int idSop){
+public Cancion(int tr, String titulo, String aut, int dur, String not, float val, int idSop){
 		idCancion=0;
                 track = tr;
 		tituloCancion = titulo;
@@ -90,11 +92,11 @@ public void setNotas(String not){
     this.notas=not;
 }
 
-public double getValoracion(){
+public float getValoracion(){
     return valoracion;
 }
 
-public void setValoracion(double val){
+public void setValoracion(float val){
     this.valoracion=val;
 }
 

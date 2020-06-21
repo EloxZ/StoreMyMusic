@@ -7,6 +7,7 @@ package sMM.modelo;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.StringJoiner;
 
 /**
  *
@@ -69,4 +70,32 @@ public class Utiles {
         }
         return res;
     }
+    
+    //Inicio David 21/06
+    public static String segundos2String(int t){
+        StringJoiner joiner = new StringJoiner("");
+        int hor = t / 3600;
+        if (hor!=0){
+            if (hor<10){
+                joiner.add("0");
+            }
+            joiner.add(String.valueOf(hor));
+            joiner.add(":");
+        }
+        int min = (t-hor*3600)/60;
+        System.out.println(min);
+        if (min<10){
+            joiner.add("0");
+        }
+        joiner.add(String.valueOf(min));
+        joiner.add(":");
+        int seg = t-(hor*3600+min*60);
+        if (seg<10){
+            joiner.add("0");
+        }
+        joiner.add(String.valueOf(seg));
+        return String.valueOf(joiner);
+    }
+    //Fin David 21/06
+    
 }

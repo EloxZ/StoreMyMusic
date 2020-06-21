@@ -65,7 +65,7 @@ public abstract class ConexionBD {
 		public abstract void añadirNotasValoracion(int id, String nota, float valoracion);
                 public abstract HashMap<Integer,Soporte> listaSoportes();
                 public abstract int añadirSoporte(Soporte s);
-                public abstract void modificarSoporte(int id, String nombre, int idDis, int idFor);
+                public abstract void modificarSoporte(int id, String nombre, int idFor);
                 public abstract void eliminarSoporte (int id);
                 public abstract void insertarPortada (int id, String p);
                 public abstract ArrayList<Pair<Integer,Integer>>  getGenerosDiscos();
@@ -75,7 +75,10 @@ public abstract class ConexionBD {
                 public abstract void modificarDisco(Disco dis);
                 public abstract void eliminarGenerosAutoresDisco(int id);
                 public abstract HashMap<Integer,Cancion> listaCanciones();
+                public abstract void DiscoAsoporte(int id, int idDisco);
                 public abstract int añadirCancion (Cancion c);
-                public abstract void modificarCancion(int id, int tr, String titulo, String aut, int dur, String not, double val, int idSop);
+//David Inicio 21/06
+                public abstract void modificarCancion(int id, int tr, String titulo, String aut, int dur, String not, float val);
+//David Fin 21/06
                 public abstract void eliminarCancion(int id);
 }

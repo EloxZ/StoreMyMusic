@@ -46,7 +46,6 @@ public class ConexionJDBC extends ConexionBD{
         return instanciaInterfaz;
     }
 
-
     /***************************************************************************************/
     /****CANCIONES***************************************************************************/
        
@@ -67,7 +66,7 @@ public class ConexionJDBC extends ConexionBD{
 				String autor = rs.getString(4);
                                 int duracion = rs.getInt(5);
                                 String notas = rs.getString(6);
-                                double valoracion = rs.getDouble(7);
+                                float valoracion = rs.getFloat(7);
                                 int soporte = rs.getInt(8);
                 		lCanciones.put(id, new Cancion(id, track, titulo, autor, duracion, notas, valoracion, soporte));
                         	System.out.println(id+" "+track+" "+titulo+" "+autor+" "+duracion+" "+notas+" "+valoracion+" "+soporte);
@@ -94,6 +93,9 @@ public class ConexionJDBC extends ConexionBD{
                         texto.setString(2, c.getTitulo());
 			texto.setString(3, c.getAutor());
                         texto.setInt(4, c.getDuracion());
+                        texto.setString(5,c.getNotas());
+                        texto.setFloat(6,c.getValoracion());
+                        texto.setInt(7,c.getIDSoporte());
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
@@ -102,21 +104,22 @@ public class ConexionJDBC extends ConexionBD{
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return cancionID;
+		System.out.println(cancionID);
+                return cancionID;
 	}	
-	
-    public void modificarCancion(int id, int tr, String titulo, String aut, int dur, String not, double val, int idSop) {
-	String query = "UPDATE Canciones SET Track = ?, TituloCancion = ?, Autor = ?, Duracion = ?, Notas = ?, Valoracion = ?, idSoporte = ? WHERE idCancion = ?";
+  
+    
+    public void modificarCancion(int id, int tr, String titulo, String aut, int dur, String not, float val) {
+	String query = "UPDATE Canciones SET Track = ?, TituloCancion = ?, Autor = ?, Duracion = ?, Notas = ?, Valoracion = ? WHERE idCancion = ?";
 	try {
 		PreparedStatement texto = conn.prepareStatement(query);
-		texto.setInt(8, id);
+		texto.setInt(7, id);
 		texto.setInt(1,tr);
                 texto.setString(2, titulo);
 		texto.setString(3, aut);
                 texto.setInt(4, dur);
                 texto.setString(5, not);
-                texto.setDouble(6, val);
-                texto.setInt(7,idSop);
+                texto.setFloat(6, val);
 		int res = texto.executeUpdate();
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -133,7 +136,6 @@ public class ConexionJDBC extends ConexionBD{
             e.printStackTrace();
         }
     }
-
 
     public ArrayList<Pair<Integer,Integer>>  getAutoresDiscos() {
         ArrayList<Pair<Integer,Integer>> ad = new ArrayList<>();
@@ -225,7 +227,14 @@ public class ConexionJDBC extends ConexionBD{
                     int idUbi = rs.getInt(16);
                     int idTien = rs.getInt(17);
                     String portada = rs.getString(18);
-
+                    boolean deseo = rs.getBoolean(19);
+                    boolean fav = rs.getBoolean(20);
+                    boolean pres = rs.getBoolean(21);
+                    
+                    
+                    d.setFavorito(fav);
+                    d.setEnListaDeseos(deseo);
+                    d.setPrestado(pres);
                     d.setTitulo(titulo);
                     d.setAnoSalida(yearSalida);
                     d.setAnoEdicion(yearEdicion);
@@ -294,13 +303,13 @@ public class ConexionJDBC extends ConexionBD{
     }
     
     public int añadirDisco(Disco dis) {
-int discoID = 0;
+		int discoID = 0;
 		java.sql.Date fecha2 = null;
 		if(dis.getFechaCompra() != null) {
 			fecha2 = java.sql.Date.valueOf(dis.getFechaCompra());
 		}
 		 
-		String insertBody = "INSERT INTO Discos(Titulo,AñoSalida,AñoEdicion,NumeroCatalogo,CodigoBarras,CodigoColeccion,FechaCompra,PrecioCompra,Notas,Valoracion,PaisEdicion,PosicionEnUbicacion, idCategoria, idDiscografica, idUbicacion, EnListaDeseo, Favorito, Prestado) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertBody = "INSERT INTO Discos(Titulo,AñoSalida,AñoEdicion,NumeroCatalogo,CodigoBarras,CodigoColeccion,FechaCompra,PrecioCompra,Notas,Valoracion,PaisEdicion,PosicionEnUbicacion, idCategoria, idDiscografica, idUbicacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement texto = conn.prepareStatement(insertBody,PreparedStatement.RETURN_GENERATED_KEYS);
 			texto.setString(1, dis.getTitulo());
@@ -340,17 +349,6 @@ int discoID = 0;
                             texto.setInt(15, dis.getIdUbicacion());
                         }
                         //texto.setInt(16, 0);
-                        if(dis.getEnListaDeseos()){
-                            dis.setPrestado(false);
-                        } else if(dis.getPrestado()){
-                            dis.setEnListaDeseos(false);
-                        }
-                        
-                        
-                        texto.setBoolean(16, dis.getEnListaDeseos());
-                        texto.setBoolean(17, dis.getFavorito());
-                        texto.setBoolean(18, dis.getPrestado());
-                        
 			int res = texto.executeUpdate();
 			ResultSet rs = texto.getGeneratedKeys();
 			while (rs.next()) {
@@ -417,7 +415,7 @@ int discoID = 0;
             }
         }
         
-        public void modificarDisco(Disco dis) {
+          public void modificarDisco(Disco dis) {
             int discoID = dis.getID();
             java.sql.Date fecha2 = null;
             if(dis.getFechaCompra() != null) {
@@ -1181,18 +1179,29 @@ int discoID = 0;
 		return soporteID;
 	}	
 	
-	public void modificarSoporte(int id, String nombre, int idDisco, int idFor) {
-		String query = "UPDATE Soportes SET nombreSoporte = ?, IdDisco = ?, IdFormato = ? WHERE idSoporte = ?";
+	public void modificarSoporte(int id, String nombre, int idFor) {
+		String query = "UPDATE Soportes SET nombreSoporte = ?, IdFormato = ? WHERE idSoporte = ?";
 		try {
 			PreparedStatement texto = conn.prepareStatement(query);
-			texto.setInt(4, id);
+			texto.setInt(3, id);
 			texto.setString(1, nombre);
-			texto.setInt(2, idDisco);
-                        texto.setInt(3, idFor);
+                        texto.setInt(2, idFor);
 			int res = texto.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+        
+        public void DiscoAsoporte(int id, int idDisco) {
+            String query = "UPDATE Soportes SET IdDisco = ? WHERE idSoporte = ?";
+            try {
+                    PreparedStatement texto = conn.prepareStatement(query);
+                    texto.setInt(1, idDisco);
+                    texto.setInt(2, id);
+                    int res = texto.executeUpdate();
+            } catch (SQLException e) {
+                    e.printStackTrace();
+            }
 	}
 
         public void eliminarSoporte(int id) {

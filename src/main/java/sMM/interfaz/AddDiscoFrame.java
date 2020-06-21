@@ -486,12 +486,23 @@ public class AddDiscoFrame extends javax.swing.JFrame {
         portadaLabel.setForeground(new java.awt.Color(255, 255, 255));
         portadaLabel.setText("IMAGEN DE PORTADA");
 
-        CheckBoxDeseados.setText("¿Añadir a lista de deseos?");
+        CheckBoxDeseados.setForeground(new java.awt.Color(254, 254, 254));
+        CheckBoxDeseados.setText("Añadir a lista de deseos");
+        CheckBoxDeseados.setOpaque(false);
+        CheckBoxDeseados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBoxDeseadosActionPerformed(evt);
+            }
+        });
 
-        CheckBoxPrestado.setText("¿Prestado?");
+        CheckBoxPrestado.setForeground(new java.awt.Color(254, 254, 254));
+        CheckBoxPrestado.setText("Prestado");
+        CheckBoxPrestado.setOpaque(false);
         CheckBoxPrestado.setPreferredSize(new java.awt.Dimension(149, 23));
 
+        CheckBoxFavorito.setForeground(new java.awt.Color(254, 254, 254));
         CheckBoxFavorito.setText("Añadir a favoritos");
+        CheckBoxFavorito.setOpaque(false);
 
         javax.swing.GroupLayout BasicosLayout = new javax.swing.GroupLayout(Basicos);
         Basicos.setLayout(BasicosLayout);
@@ -527,7 +538,7 @@ public class AddDiscoFrame extends javax.swing.JFrame {
                             .addGroup(BasicosLayout.createSequentialGroup()
                                 .addComponent(valoracionField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(CheckBoxDeseados, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(CheckBoxDeseados))
                             .addGroup(BasicosLayout.createSequentialGroup()
                                 .addGroup(BasicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(posField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -540,7 +551,7 @@ public class AddDiscoFrame extends javax.swing.JFrame {
                                         .addComponent(discograficaField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(BasicosLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(CheckBoxFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(CheckBoxFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(BasicosLayout.createSequentialGroup()
                                 .addComponent(portadaField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -791,7 +802,7 @@ public class AddDiscoFrame extends javax.swing.JFrame {
         Base.setLayout(BaseLayout);
         BaseLayout.setHorizontalGroup(
             BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Dragger, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addComponent(Dragger, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
             .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BaseLayout.setVerticalGroup(
@@ -1143,6 +1154,10 @@ public class AddDiscoFrame extends javax.swing.JFrame {
     private void portadaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portadaFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_portadaFieldActionPerformed
+
+    private void CheckBoxDeseadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxDeseadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBoxDeseadosActionPerformed
 
     /**
      * @param args the command line arguments

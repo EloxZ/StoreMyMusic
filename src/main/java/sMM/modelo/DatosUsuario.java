@@ -27,8 +27,8 @@ public class DatosUsuario {
     private HashMap<Integer,Genero> generos;
     private HashMap<Integer,Amigo> amigos;
     private HashMap<Integer,Soporte> soportes;
-    private HashMap<Integer,Formato> formatos;
     private HashMap<Integer,Cancion> canciones;
+    private HashMap<Integer,Formato> formatos;
     
     
     public HashMap<Integer, Cancion> getCanciones() {
@@ -39,6 +39,49 @@ public class DatosUsuario {
         this.canciones = canciones;
     }
     
+    public int duracionSoporte(int idSoporte) {
+        Collection<Cancion> cs = canciones.values();
+        int res = 0;
+        for (Cancion c : cs) {
+            if (c.getIDSoporte() == idSoporte) {
+                res += c.getDuracion();
+            }
+        }
+        return res;
+    }
+    
+    public int duracionDisco(int idDisco) {
+        Collection<Soporte> ss = soportes.values();
+        int res = 0;
+        for (Soporte s : ss) {
+            if (s.getIDDisco() == idDisco) {
+                res += duracionSoporte(s.getID());
+            }
+        }
+        return res;
+    }
+    
+    public int cancionesDisco(int idDisco) {
+        Collection<Soporte> ss = soportes.values();
+        int res = 0;
+        for (Soporte s : ss) {
+            if (s.getIDDisco() == idDisco) {
+                res += cancionesSoporte(s.getID());
+            }
+        }
+        return res;
+    }
+    
+    public int cancionesSoporte(int idSoporte) {
+        int res = 0;
+        Collection<Cancion> cs = canciones.values();
+        for (Cancion c : cs) {
+            if (c.getIDSoporte() == idSoporte) {
+                res++;
+            }
+        }
+        return res;
+    }
     
     public ArrayList<Pair<Integer, Integer>> getGenerosDiscos() {
         return generosDiscos;

@@ -36,11 +36,12 @@ import sMM.modelo.Soporte;
  *
  * @author Eloy
  */
-public class SoporteFrame extends javax.swing.JFrame {
+public class SoporteFrameSel extends javax.swing.JFrame {
  // Variables para mover ventana desde la barra de titulo (Dragger)
     Point start_drag;
     Point start_loc;
     boolean dragging;
+    private int idDisco;
     MainFrame mFrame;
     private HashMap<Integer,Integer> tuplaFilaSoporte;
     private HashMap<Integer,Integer> tuplaSelFormato;
@@ -80,16 +81,21 @@ public class SoporteFrame extends javax.swing.JFrame {
         if (du != null && du.getSoportes() != null) {
             int i = 0;
             for (Map.Entry<Integer,Soporte> ed : du.getSoportes().entrySet()) {
-                String[] listaAtributos = new String[3];
-                Formato f = du.getFormatos().get(ed.getValue().getIDFormato());
-                Disco d = du.getDiscos().get(ed.getValue().getIDDisco());
-                
-                listaAtributos[0] = (f == null)? "" : f.getNombre();
-                listaAtributos[1] = ed.getValue().getNombre();
-                listaAtributos[2] = (d == null)? "" : d.getTitulo();
-                tuplaFilaSoporte.put(i, ed.getValue().getID());
-                listModel.addRow(listaAtributos);
-                i++;
+                int idDiscoAmeter = ed.getValue().getIDDisco();
+                if (idDiscoAmeter == 0 || idDiscoAmeter == idDisco) {
+                    String[] listaAtributos = new String[3];
+                    Formato f = du.getFormatos().get(ed.getValue().getIDFormato());
+                    Disco d = du.getDiscos().get(idDiscoAmeter);
+
+
+                    listaAtributos[0] = (f == null)? "" : f.getNombre();
+                    listaAtributos[1] = ed.getValue().getNombre();
+                    listaAtributos[2] = (d == null)? "" : d.getTitulo();
+                    tuplaFilaSoporte.put(i, ed.getValue().getID());
+                    listModel.addRow(listaAtributos);
+                    i++;
+                }
+
             }
         }
         
@@ -160,8 +166,9 @@ public class SoporteFrame extends javax.swing.JFrame {
         });
     }
     
-    public SoporteFrame(MainFrame f) {
+    public SoporteFrameSel(MainFrame f) {
         mFrame = f;
+        idDisco = mFrame.idDiscoMarcado;
         initComponents();
         configComponentes();
         configVentana();
@@ -191,6 +198,7 @@ public class SoporteFrame extends javax.swing.JFrame {
         busquedaLabel = new javax.swing.JLabel();
         FormatoBox = new javax.swing.JComboBox<>();
         formatoLabel = new javax.swing.JLabel();
+        selButton = new javax.swing.JButton();
         Dragger = new javax.swing.JPanel();
         Minimizar = new javax.swing.JLabel();
         Cerrar = new javax.swing.JLabel();
@@ -314,6 +322,13 @@ public class SoporteFrame extends javax.swing.JFrame {
         formatoLabel.setForeground(new java.awt.Color(254, 254, 254));
         formatoLabel.setText("FORMATO");
 
+        selButton.setText("Seleccionar / Quitar");
+        selButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout BaseLayout = new javax.swing.GroupLayout(Base);
         Base.setLayout(BaseLayout);
         BaseLayout.setHorizontalGroup(
@@ -327,7 +342,10 @@ public class SoporteFrame extends javax.swing.JFrame {
                 .addGroup(BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(nombreLabel)
                     .addComponent(nombreField)
-                    .addComponent(eliminarButton)
+                    .addGroup(BaseLayout.createSequentialGroup()
+                        .addComponent(eliminarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(busquedaField)
                     .addComponent(busquedaLabel)
                     .addGroup(BaseLayout.createSequentialGroup()
@@ -366,7 +384,9 @@ public class SoporteFrame extends javax.swing.JFrame {
                                 .addComponent(modificarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(aplicarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(eliminarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                                .addComponent(selButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(PanelLista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -578,6 +598,7 @@ public class SoporteFrame extends javax.swing.JFrame {
             mFrame.consultarDiscos();
             //du.addAutor(new Autor(id,n,nac));
             cargarDatos();
+            mFrame.actualizarVerDisco(idDisco);
             
         } catch (Exception e) {
             
@@ -591,6 +612,7 @@ public class SoporteFrame extends javax.swing.JFrame {
             mFrame.consultarDiscos();
             //du.modificarSoporte(id, n, iddis);
             cargarDatos();
+            mFrame.actualizarVerDisco(idDisco);
             
             
             
@@ -624,6 +646,7 @@ public class SoporteFrame extends javax.swing.JFrame {
             //du.eliminarAutor(id);
             mFrame.consultarDiscos();
             cargarDatos();
+            mFrame.actualizarVerDisco(idDisco);
             
             
             
@@ -648,6 +671,36 @@ public class SoporteFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FormatoBoxActionPerformed
 
+    private void selButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selButtonMouseClicked
+        if (evt.getButton() == 1) {
+            if (Lista.getSelectedRow() != -1) {
+                
+                int soporteSel = tuplaFilaSoporte.get(Lista.convertRowIndexToModel(Lista.getSelectedRow()));
+                int discoSel = du.getSoportes().get(soporteSel).getIDDisco();
+                if (discoSel == 0) {
+                    asignarDiscoAsoporte(idDisco, soporteSel);
+                } else if (discoSel == idDisco) {
+                    asignarDiscoAsoporte(0, soporteSel);
+                }
+            }
+        }
+    }//GEN-LAST:event_selButtonMouseClicked
+    
+    private void asignarDiscoAsoporte(int disco, int soporte) {
+        ConexionBD bd = ConexionJDBC.getInstance();
+        try {
+            bd.DiscoAsoporte(soporte, disco);
+            mFrame.consultarDiscos();
+            //du.modificarSoporte(id, n, iddis);
+            cargarDatos();
+            mFrame.actualizarVerDisco(idDisco);
+            
+            
+            
+        } catch (Exception e) {
+            
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -665,14 +718,18 @@ public class SoporteFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SoporteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoporteFrameSel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SoporteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoporteFrameSel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SoporteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoporteFrameSel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SoporteFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SoporteFrameSel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -681,7 +738,7 @@ public class SoporteFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SoporteFrame(null).setVisible(true);
+                new SoporteFrameSel(null).setVisible(true);
             }
         });
     }
@@ -704,5 +761,6 @@ public class SoporteFrame extends javax.swing.JFrame {
     private javax.swing.JTextField nombreField;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JButton nuevoButton;
+    private javax.swing.JButton selButton;
     // End of variables declaration//GEN-END:variables
 }
