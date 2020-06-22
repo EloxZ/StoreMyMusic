@@ -87,7 +87,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             public boolean include(RowFilter.Entry<? extends CustomTableModel, ? extends Integer> entry) {
                 
                 int idEnTabla = entry.getIdentifier();
-                int idDiscoMarcado = tuplaFilaDisco.get(Lista.convertRowIndexToModel(idEnTabla));
+                int idDiscoMarcado = tuplaFilaDisco.get(idEnTabla);
                 if (du.getDiscos().get(idDiscoMarcado).getEnListaDeseos()==true) {
                     // Returning true indicates this row should be shown.
                     return true;
@@ -99,7 +99,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             public boolean include(RowFilter.Entry<? extends CustomTableModel, ? extends Integer> entry) {
                 
                 int idEnTabla = entry.getIdentifier();
-                int idDiscoMarcado = tuplaFilaDisco.get(Lista.convertRowIndexToModel(idEnTabla));
+                int idDiscoMarcado = tuplaFilaDisco.get(idEnTabla);
                 if (du.getDiscos().get(idDiscoMarcado).getEnListaDeseos()==false) {
                     // Returning true indicates this row should be shown.
                     return true;
@@ -111,7 +111,7 @@ public class MainFrame extends javax.swing.JFrame implements WindowListener {
             public boolean include(RowFilter.Entry<? extends CustomTableModel, ? extends Integer> entry) {
                 
                 int idEnTabla = entry.getIdentifier();
-                int idDiscoMarcado = tuplaFilaDisco.get(Lista.convertRowIndexToModel(idEnTabla));
+                int idDiscoMarcado = tuplaFilaDisco.get(idEnTabla);
                 if (du.getDiscos().get(idDiscoMarcado).getFavorito()==true) {
                     // Returning true indicates this row should be shown.
                     return true;
